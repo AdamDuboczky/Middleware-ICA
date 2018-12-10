@@ -9,32 +9,9 @@ package NodeMonitor;
  *
  * @author Adam
  */
-public class NodeMonitor implements Monitorable
+public class NodeMonitor
 {
-    Monitorable monitor;
-
-    @Override
-    public void addMonitor()
-    {
-        
-    }
-
-    @Override
-    public void removeMonitor()
-    {
-        monitor = null;
-    }
-
-    @Override
-    public boolean hasMonitor()
-    {
-        return monitor != null;
-    }
-
-    @Override
-    public void update(String message)
-    {
-        System.out.println("");
-    }
+    //Message
+    //Adapter?
     
 }

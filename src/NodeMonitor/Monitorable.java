@@ -6,7 +6,7 @@
 package NodeMonitor;
 
 /**
- * Interface to be implemented by 
+ * Interface to be implemented by classes for monitoring
  * @author t7081971
  */
 public interface Monitorable 
