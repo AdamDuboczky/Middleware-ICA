@@ -9,7 +9,32 @@ package NodeMonitor;
  *
  * @author Adam
  */
-public class NodeMonitor
+public class NodeMonitor implements Monitorable
 {
+    
+
+    @Override
+    public void addMonitor()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeMonitor()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean hasMonitor()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String update()
+    {
+        return System.out.println("");
+    }
     
 }
