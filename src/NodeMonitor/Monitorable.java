@@ -36,6 +36,6 @@ public interface Monitorable
      * @return String to be printed to console
      */
     
-    public String update();    
+    public void update(String message);    
     
 }

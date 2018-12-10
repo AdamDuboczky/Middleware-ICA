@@ -11,30 +11,30 @@ package NodeMonitor;
  */
 public class NodeMonitor implements Monitorable
 {
-    
+    Monitorable monitor;
 
     @Override
     public void addMonitor()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void removeMonitor()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        monitor = null;
     }
 
     @Override
     public boolean hasMonitor()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return monitor != null;
     }
 
     @Override
-    public String update()
+    public void update(String message)
     {
-        return System.out.println("");
+        System.out.println("");
     }
     
 }
