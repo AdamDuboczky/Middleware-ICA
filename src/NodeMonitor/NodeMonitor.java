@@ -11,6 +11,19 @@ package NodeMonitor;
  */
 public class NodeMonitor
 {
+    String status;
+    Monitorable monitoring;
+
+    public NodeMonitor(Monitorable monitoring)
+    {
+        this.monitoring = monitoring;
+        monitoring.addMonitor(this);
+    }   
+    
+    public void update()
+    {
+        status = monitoring.update();
+    }
     //Message
     //Adapter?
     

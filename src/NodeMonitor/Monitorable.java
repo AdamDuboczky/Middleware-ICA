@@ -9,19 +9,26 @@ package NodeMonitor;
  * Interface to be implemented by classes for monitoring
  * @author t7081971
  */
-public interface Monitorable 
+public abstract class Monitorable 
 {
+    protected NodeMonitor nodeMonitor;
     /**
      * Method to add a monitor to a class
      */  
     
-    public void addMonitor();
+    public void addMonitor(NodeMonitor monitor)
+    {
+        nodeMonitor = monitor;
+    }
     
     /**
      * Method to remove a monitor to a class
      */ 
     
-    public void removeMonitor();
+    public void removeMonitor()
+    {
+        nodeMonitor = null;
+    }
     
     /**
      * Method to check if class currently has a monitor or not
@@ -29,13 +36,19 @@ public interface Monitorable
      * @return Boolean, true if class has monitor, false if not.
      */
     
-    public boolean hasMonitor();
+    public boolean hasMonitor()
+    {
+        return nodeMonitor != null;
+    }
     
     /**
      * Method to return status
      * @return String to be printed to console
      */
     
-    public void update(String message);    
+    public String update()
+    {
+        return "Not implemented yet";
+    }
     
 }
