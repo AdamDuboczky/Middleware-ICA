@@ -5,11 +5,27 @@
  */
 package Portals;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Adam
  */
 public class Portal
 {
+    //Store connected meta agents
+    private HashMap<String, MetaAgent> mapOfMetaAgents = new HashMap<>();
     
+    String portalName;
+    
+    Portal(String portalName)
+    {
+        this.portalName = portalName;
+    }    
+    
+    void connectToHub()
+    {}
+    
+    void processMessage()
+    {}
 }
