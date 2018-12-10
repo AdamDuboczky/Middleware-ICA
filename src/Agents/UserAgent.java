@@ -4,16 +4,18 @@
  * and open the template in the editor.
  */
 
-package Message;
+package Agents;
 
 /**
  *
  * @author T-A-T
  */
-public interface Message 
-{
-    public abstract String getUserMessage();
-    
-    public abstract String getSysMessage();
+public class UserAgent extends MetaAgent
+{   
+    public UserAgent()
+    {
+        
+    }
+    //End of UserAgent default constructor
 }
-//End of Message interface
+//End of UserAgent class

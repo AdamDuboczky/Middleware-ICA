@@ -3,38 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package NodeMonitor;
 
 /**
  *
- * @author Adam
+ * @author T-A-T
  */
-public class NodeMonitor implements Monitorable
+public class Monitor
 {
-    
-
-    @Override
-    public void addMonitor()
+    public Monitor()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
-
-    @Override
-    public void removeMonitor()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean hasMonitor()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String update()
-    {
-        return System.out.println("");
-    }
-    
+    //End of NodeMonitor default constructor
 }
+//End of NodeMonitor class

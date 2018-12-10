@@ -4,16 +4,18 @@
  * and open the template in the editor.
  */
 
-package Message;
+package Agents;
 
 /**
  *
  * @author T-A-T
  */
-public interface Message 
+public class PortalHub extends Portal
 {
-    public abstract String getUserMessage();
-    
-    public abstract String getSysMessage();
+    public PortalHub()
+    {
+        
+    }
+    //End of PortalHub default constructor
 }
-//End of Message interface
+//End of PortalHub class

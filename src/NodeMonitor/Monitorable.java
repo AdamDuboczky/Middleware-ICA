@@ -3,39 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package NodeMonitor;
 
+import Monitor.NodeMonitor;
+
 /**
- * Interface to be implemented by 
- * @author t7081971
+ *
+ * @author T-A-T
  */
 public interface Monitorable 
 {
-    /**
-     * Method to add a monitor to a class
-     */  
+    public void addNodeMonitor(NodeMonitor nodeMonitor);
     
-    public void addMonitor();
+    public void removeNodeMonitor();
     
-    /**
-     * Method to remove a monitor to a class
-     */ 
-    
-    public void removeMonitor();
-    
-    /**
-     * Method to check if class currently has a monitor or not
-     * 
-     * @return Boolean, true if class has monitor, false if not.
-     */
-    
-    public boolean hasMonitor();
-    
-    /**
-     * Method to return status
-     * @return String to be printed to console
-     */
-    
-    public String update();    
-    
+    public boolean hasNodeMonitor();
 }
+//End of Monitorable interface
