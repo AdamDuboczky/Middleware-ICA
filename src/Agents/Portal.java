@@ -18,8 +18,9 @@ public class Portal extends MetaAgent
      protected final Map<String, MetaAgent> agentTable;
      protected String portalType;
      
-     public Portal()
+     public Portal(String name, MetaAgent superAgent)
      {
+        super(name, superAgent);
         agentTable = new HashMap<>();
      }
      //End of Portal default constructor

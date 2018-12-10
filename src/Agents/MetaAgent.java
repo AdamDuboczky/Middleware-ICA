@@ -7,8 +7,8 @@
 package Agents;
 
 import Message.Message;
+import Monitor.Monitor;
 import Monitor.Monitorable;
-import Monitor.NodeMonitor;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -20,7 +20,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     protected String name;
     private final Thread thread;
     private MetaAgent superAgent;
-    private NodeMonitor monitor;
+    private Monitor monitor;
     
     public MetaAgent(String name, MetaAgent superAgent)
     {
@@ -40,20 +40,24 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     //End of run
 
     @Override
-    public void addMonitor(NodeMonitor nodeMonitor)
+    public void addMonitor(Monitor monitor)
     {
-        
+        this.monitor = monitor;
     }
+    //End of addMonitor
 
     @Override
     public void removeMonitor()
     {
-            }
+        monitor = null;
+    }
+    //End of removeMonitor
 
     @Override
     public boolean hasMonitor()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return monitor != null; 
     }
+    //End of hasMonitor
 }
 //End of MetaAgent class

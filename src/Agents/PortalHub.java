@@ -12,9 +12,9 @@ package Agents;
  */
 public class PortalHub extends Portal
 {
-    public PortalHub()
+    public PortalHub(String name, MetaAgent superAgent)
     {
-        
+        super(name, superAgent);
     }
     //End of PortalHub default constructor
 }

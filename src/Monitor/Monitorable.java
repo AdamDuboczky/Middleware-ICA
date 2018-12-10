@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 
-package NodeMonitor;
-
-import Monitor.NodeMonitor;
+package Monitor;
 
 /**
  *
@@ -14,10 +12,10 @@ import Monitor.NodeMonitor;
  */
 public interface Monitorable 
 {
-    public void addNodeMonitor(NodeMonitor nodeMonitor);
+    public void addMonitor(Monitor Monitor);
     
-    public void removeNodeMonitor();
+    public void removeMonitor();
     
-    public boolean hasNodeMonitor();
+    public boolean hasMonitor();
 }
 //End of Monitorable interface

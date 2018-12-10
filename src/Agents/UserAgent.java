@@ -12,9 +12,9 @@ package Agents;
  */
 public class UserAgent extends MetaAgent
 {   
-    public UserAgent()
+    public UserAgent(String name, MetaAgent superAgent)
     {
-        
+        super(name, superAgent);
     }
     //End of UserAgent default constructor
 }
