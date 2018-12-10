@@ -1,11 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package Portals;
 
+import Agents.Agent;
 import java.util.HashMap;
+import java.util.concurrent.BlockingQueue;
 
 /**
  *
@@ -14,8 +14,8 @@ import java.util.HashMap;
 public class Portal
 {
     //Store connected meta agents
-    private HashMap<String, MetaAgent> mapOfMetaAgents = new HashMap<>();
-    
+    private HashMap<String, Agent> mapOfPortals = new HashMap<>();
+    private BlockingQueue queue;
     String portalName;
     
     Portal(String portalName)
