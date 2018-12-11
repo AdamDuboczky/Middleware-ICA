@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package NodeMonitor;
 
 /**
@@ -10,8 +11,7 @@ package NodeMonitor;
  * @author t7081971
  */
 public abstract class Monitorable 
-{
-    protected NodeMonitor nodeMonitor;
+{    protected NodeMonitor nodeMonitor;
     /**
      * Method to add a monitor to a class
      */  
@@ -24,11 +24,6 @@ public abstract class Monitorable
     /**
      * Method to remove a monitor to a class
      */ 
-    
-    public void removeMonitor()
-    {
-        nodeMonitor = null;
-    }
     
     /**
      * Method to check if class currently has a monitor or not
@@ -52,3 +47,4 @@ public abstract class Monitorable
     }
     
 }
+//End of Monitorable interface

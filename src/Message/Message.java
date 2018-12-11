@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Message;
 
 /**
  *
- * @author Adam
+ * @author T-A-T
  */
-public class Message
+public interface Message 
 {
+    public abstract String getUserMessage();
     
+    public abstract String getSysMessage();
 }
+//End of Message interface
