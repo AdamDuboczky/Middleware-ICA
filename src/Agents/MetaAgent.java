@@ -26,11 +26,21 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     {
         super();
         
-        this.name = name;
         this.superAgent = superAgent;
         thread = new Thread(this);
+        
+        if(name != null &&)
+        {
+            this.name = 
+        }
     }
     //End of MetaAgent default constructor
+    
+    public MetaAgent getSuperAgent()
+    {
+        return superAgent;
+    }
+    //End of getSuperAgent
     
     @Override
     public void run()
