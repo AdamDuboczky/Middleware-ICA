@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Simulation;
 
 /**
  *
  * @author Dub_2
  */
-public class NewClass
+public class Main
 {
-    
+    public static void main(String[] args)
+    {
+        
+    }
 }
