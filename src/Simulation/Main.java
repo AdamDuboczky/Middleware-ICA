@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package Message;
+package Simulation;
 
 /**
  *
- * @author T-A-T
+ * @author Dub_2
  */
-public interface Message 
+public class Main
 {
-    public abstract String getUserMessage();
-    
-    public abstract String getSysMessage();
+    public static void main(String[] args)
+    {
+        
+    }
 }
-//End of Message interface
