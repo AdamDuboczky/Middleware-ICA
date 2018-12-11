@@ -3,19 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package NodeMonitor;
 
 /**
  *
- * @author T-A-T
+ * @author Adam
  */
 public class NodeMonitor
 {
-    public NodeMonitor()
+    String status;
+    Monitorable monitoring;
+
+    public NodeMonitor(Monitorable monitoring)
     {
-        
+        this.monitoring = monitoring;
+        monitoring.addMonitor(this);
+    }   
+    
+    public void update()
+    {
+        status = monitoring.update();
     }
-    //End of NodeMonitor default constructor
+    //Message
+    //Adapter?
+    
 }
-//End of NodeMonitor class
