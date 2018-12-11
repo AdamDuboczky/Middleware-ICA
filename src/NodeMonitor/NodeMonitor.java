@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-package Monitor;
+package NodeMonitor;
 
 /**
  *
  * @author T-A-T
  */
-public interface Monitorable 
+public class NodeMonitor
 {
-    public void addMonitor(Monitor Monitor);
-    
-    public void removeMonitor();
-    
-    public boolean hasMonitor();
+    public NodeMonitor()
+    {
+        
+    }
+    //End of NodeMonitor default constructor
 }
-//End of Monitorable interface
+//End of NodeMonitor class

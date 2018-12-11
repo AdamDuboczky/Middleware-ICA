@@ -7,8 +7,8 @@
 package Agents;
 
 import Message.Message;
-import Monitor.Monitor;
-import Monitor.Monitorable;
+import NodeMonitor.NodeMonitor;
+import NodeMonitor.Monitorable;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -20,7 +20,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     protected String name;
     private final Thread thread;
     private MetaAgent superAgent;
-    private Monitor monitor;
+    private NodeMonitor monitor;
     
     public MetaAgent(String name, MetaAgent superAgent)
     {
@@ -50,7 +50,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     //End of run
 
     @Override
-    public void addMonitor(Monitor monitor)
+    public void addMonitor(NodeMonitor monitor)
     {
         this.monitor = monitor;
     }
