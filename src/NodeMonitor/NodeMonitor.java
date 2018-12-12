@@ -3,28 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package NodeMonitor;
+
+import Message.Message;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author Adam
+ * @author T-A-T
  */
 public class NodeMonitor
 {
-    String status;
-    Monitorable monitoring;
-
-    public NodeMonitor(Monitorable monitoring)
-    {
-        this.monitoring = monitoring;
-        monitoring.addMonitor(this);
-    }   
+    private List<Message> messageLog;
     
-    public void update()
+    public NodeMonitor()
     {
-        status = monitoring.update();
+        messageLog = new ArrayList<>();
     }
-    //Message
-    //Adapter?
+    //End of NodeMonitor default constructor
     
+    public void updateMonitor(Message message)
+    {
+        if(message != null)
+        {
+            messageLog.add(message);
+        }
+    }
+    //End of updateMonitor
 }
+//End of NodeMonitor class
