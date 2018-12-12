@@ -4,18 +4,14 @@
  * and open the template in the editor.
  */
 
-package NodeMonitor;
+package Message;
 
 /**
  *
  * @author T-A-T
  */
-public interface Monitorable 
+public enum SysMsgTypes 
 {
-    public void addMonitor(NodeMonitor Monitor);
-    
-    public void removeMonitor();
-    
-    public boolean hasMonitor();
+    VALID, NOTFOUND, ERROR;
 }
-//End of Monitorable interface
+//End of SysMsgTypes class

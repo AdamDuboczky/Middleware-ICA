@@ -6,6 +6,8 @@
 
 package Message;
 
+import Agents.PortalTypes;
+
 /**
  *
  * @author T-A-T
@@ -14,6 +16,12 @@ public interface Message
 {
     public abstract String getUserMessage();
     
-    public abstract String getSysMessage();
+    public abstract String getDestination();
+    
+    public abstract String getSender();
+    
+    public abstract PortalTypes getDestPortType();
+    
+    public abstract SysMsgTypes getSysMessage();
 }
 //End of Message interface

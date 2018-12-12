@@ -4,18 +4,14 @@
  * and open the template in the editor.
  */
 
-package NodeMonitor;
+package Agents;
 
 /**
  *
  * @author T-A-T
  */
-public interface Monitorable 
+public enum PortalTypes 
 {
-    public void addMonitor(NodeMonitor Monitor);
-    
-    public void removeMonitor();
-    
-    public boolean hasMonitor();
+    BROAD,HUB,ONE,TWO,THREE,FOUR;
 }
-//End of Monitorable interface
+//End of PortalTypes enum
