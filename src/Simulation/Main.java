@@ -6,6 +6,11 @@
 
 package Simulation;
 
+import Agents.Portal;
+import Agents.PortalHub;
+import Agents.PortalTypes;
+import Agents.UserAgent;
+
 /**
  *
  * @author T-A-T
@@ -18,6 +23,20 @@ public class Main
      */
     public static void main(String[] args) 
     {
+        //Creates a which all of the portals are connected to
+        PortalHub hub = new PortalHub(PortalTypes.HUB, "Portal Hub", null);
+        //Creates the portals and creates the links to the hub
+        Portal p1 = new Portal(PortalTypes.ONE, "P1", hub);
+        Portal p2 = new Portal(PortalTypes.TWO, "p2", hub);
+        Portal p3 = new Portal(PortalTypes.THREE, "p3", hub);
+        Portal p4 = new Portal(PortalTypes.FOUR, "p4", hub);
+        //Creates the agents and links them to the portals
+        UserAgent a1 = new UserAgent("a1", p1);
+        UserAgent a2 = new UserAgent("a2", p4);
+        //Agent.registerWithSuper(a1, "Agent1") ??????
+        a1.sendMessage(PortalTypes.FOUR, "a2" , "you smell");
+        
+        
         /*
         Needs to create portal hub,
         then all portals attached to it,
