@@ -6,6 +6,9 @@
 
 package Message;
 
+import Agents.PortalTypes;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author T-A-T
@@ -13,12 +16,16 @@ package Message;
 public class SystemMsg implements Message
 {
     private final Message inner;
-    private final String systemMsg;
+    private final SysMsgTypes systemMsg;
+    private final LocalDateTime timeStamp;
+    private final PortalTypes portalVisited;
     
-    public SystemMsg(Message inner, String sysMsg)
+    public SystemMsg(Message inner, PortalTypes portalVisited, SysMsgTypes systemMsg)
     {
         this.inner = inner;
-        systemMsg = sysMsg;
+        this.systemMsg = systemMsg;
+        this.portalVisited = portalVisited;
+        this.timeStamp = LocalDateTime.now();
     }
     //End of SystemMsg default constructor
     
@@ -28,11 +35,33 @@ public class SystemMsg implements Message
         return inner.getUserMessage();
     }
     //End of getMessage
+    
+    @Override
+    public String getDestination()
+    {
+        return inner.getDestination();
+    }
+    //End of getDestination
 
     @Override
-    public String getSysMessage()
+    public String getSender()
     {
-        return inner + inner.getSysMessage();
+        return inner.getSender();
     }
+    //End of getSender
+
+    @Override
+    public SysMsgTypes getSysMessage()
+    {
+        return this.systemMsg;
+    }
+    //End of getSysMessage
+    
+    @Override
+    public PortalTypes getDestPortType()
+    {
+        return inner.getDestPortType();
+    }
+    //End of getDestPortType
 }
 //End of SystemMsg class

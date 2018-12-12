@@ -7,9 +7,11 @@
 package Agents;
 
 import Message.Message;
-import NodeMonitor.NodeMonitor;
 import NodeMonitor.Monitorable;
+import NodeMonitor.NodeMonitor;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,23 +20,33 @@ import java.util.concurrent.LinkedBlockingQueue;
 public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements Runnable, Monitorable
 {
     protected String name;
-    private final Thread thread;
-    private MetaAgent superAgent;
-    private NodeMonitor monitor;
+    protected final Thread thread;
+    protected Portal superAgent;
+    protected NodeMonitor monitor;
     
-    public MetaAgent(String name, MetaAgent superAgent)
+    public MetaAgent(String name, Portal superAgent)
     {
         super();
-        
-        this.superAgent = superAgent;
         thread = new Thread(this);
-        
-        if(name != null &&)
-        {
-            this.name = 
-        }
+        setName(name);
+        setSuperAgent(superAgent);
     }
     //End of MetaAgent default constructor
+    
+    public String getName()
+    {
+        return this.name;
+    }
+    //End of getName
+    
+    private void setName(String name)
+    {
+        if(name != null && this.superAgent != null)
+        {
+            this.name = this.superAgent.checkValidName(name);
+        }
+    }
+    //End of setName
     
     public MetaAgent getSuperAgent()
     {
@@ -42,12 +54,55 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     }
     //End of getSuperAgent
     
+    private void setSuperAgent(Portal superAgent)
+    {
+        this.superAgent = superAgent;
+        
+        if(this.superAgent != null)
+        {
+            this.superAgent.registerWithSuper(this, this.name);
+        }
+    }
+    //End of setSuperAgent
+    
+    public void pushToSuper(Message message)
+    {
+        if(message != null)
+        {
+            try
+            {
+                superAgent.put(message);
+            }
+            catch(InterruptedException ie)
+            {
+                Logger.getLogger(MetaAgent.class.getName()).log(Level.SEVERE, null, ie);
+            }
+        }
+    }
+    //End of pushToSuper
+    
     @Override
     public void run()
     {
-        
+        while(true)
+        {
+            try
+            {
+                handleMessage(take());
+            }
+            catch (InterruptedException ie)
+            {
+                Logger.getLogger(MetaAgent.class.getName()).log(Level.SEVERE, null, ie);
+            }
+        }
     }
     //End of run
+    
+    public void start()
+    {
+        thread.start();
+    }
+    //End of start
 
     @Override
     public void addMonitor(NodeMonitor monitor)
@@ -69,5 +124,26 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
         return monitor != null; 
     }
     //End of hasMonitor
+    
+    protected void updateMonitor(Message message)
+    {
+        if(this.monitor != null)
+        {
+            monitor.updateMonitor(message);
+        }
+    }
+    //End of updateMonitor
+    
+    protected void handleMessage(Message message)
+    {
+        if(message != null)
+        {
+            updateMonitor(message);
+            messageHandler(message);
+        }
+    }
+    //End of handleMessage
+    
+    protected abstract void messageHandler(Message message);
 }
 //End of MetaAgent class
