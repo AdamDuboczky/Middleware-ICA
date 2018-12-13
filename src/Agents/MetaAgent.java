@@ -136,7 +136,8 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     }
     //End of hasMonitor
     
-    protected void updateMonitor(Message message)
+    @Override
+    public void updateMonitor(Message message)
     {
         if(this.monitor != null)
         {
@@ -149,7 +150,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     {
         if(message != null)
         {
-            updateMonitor(message);
+            updateMonitor(message);//what if no monitor?
             messageHandler(message);
         }
     }

@@ -6,6 +6,8 @@
 
 package NodeMonitor;
 
+import Message.Message;
+
 /**
  *
  * @author T-A-T
@@ -37,6 +39,6 @@ public interface Monitorable
      * @return String to be printed to console
      */
     
-    public String update();    
+    public void updateMonitor(Message message); 
 }
 //End of Monitorable interface
