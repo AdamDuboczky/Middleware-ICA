@@ -64,5 +64,19 @@ public class UserMsg implements Message
         return destPortalType;
     }
     //End of getDestPortType
+
+    @Override
+    public PortalTypes getSenderPort()
+    {
+        return null;
+    }
+    //End of getSenderPort
+
+    @Override
+    public PortalTypes getPortVisited()
+    {
+        return null;
+    }
+    //End of getPortVisited
 }
 //End of User class

@@ -10,6 +10,7 @@ import Message.Message;
 import Message.SysMsgTypes;
 import Message.SystemMsg;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +25,7 @@ public class PortalHub extends Portal
     public PortalHub(PortalTypes portType, String name, Portal superAgent)
     {
         super(portType, name, superAgent);
+        agentTable = new ConcurrentHashMap<>();
     }
     //End of PortalHub default constructor
     
@@ -75,7 +77,7 @@ public class PortalHub extends Portal
             
             try
             {
-                agentTable.get(message.getDestPortType()).put(message);
+                agentTable.get(message.getSenderPort()).put(message);
             }
             catch (InterruptedException ie)
             {

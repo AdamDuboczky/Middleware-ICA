@@ -71,7 +71,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
         
         if(this.superAgent != null)
         {
-            this.superAgent.registerWithSuper(this, this.name);
+            this.superAgent.registerWithSuper(this, this.name); //PORTALHUB CAN'T USE THIS PROPERLY, IT DOESN'T USE NAMES!!!
         }
     }
     //End of setSuperAgent
@@ -97,14 +97,17 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     {
         while(true)
         {
-            try
+            if(!this.isEmpty())
             {
-                handleMessage(take());
-            }
-            catch (InterruptedException ie)
-            {
-                Logger.getLogger(MetaAgent.class.getName()).log(Level.SEVERE, null, ie);
-            }
+                try
+                {
+                    handleMessage(take());
+                }
+                catch (InterruptedException ie)
+                {
+                    Logger.getLogger(MetaAgent.class.getName()).log(Level.SEVERE, null, ie);
+                }
+            } 
         }
     }
     //End of run
@@ -150,7 +153,10 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     {
         if(message != null)
         {
-            updateMonitor(message);//what if no monitor?
+            if(hasMonitor())
+            {
+                updateMonitor(message);
+            }
             messageHandler(message);
         }
     }

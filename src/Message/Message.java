@@ -23,5 +23,9 @@ public interface Message
     public abstract PortalTypes getDestPortType();
     
     public abstract SysMsgTypes getSysMessage();
+    
+    public abstract PortalTypes getSenderPort();
+    
+    public abstract PortalTypes getPortVisited();
 }
 //End of Message interface

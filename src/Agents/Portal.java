@@ -9,8 +9,8 @@ package Agents;
 import Message.Message;
 import Message.SysMsgTypes;
 import Message.SystemMsg;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +34,7 @@ public class Portal extends MetaAgent
      {
         super(name, superAgent);
         this.portalType = portalType;
-        agentTable = new HashMap<>();
+        agentTable = new ConcurrentHashMap<>();
      }
      //End of Portal default constructor
 
@@ -145,7 +145,7 @@ public class Portal extends MetaAgent
             
             try
             {
-                agentTable.get(message.getDestination()).put(message);
+                agentTable.get(message.getSenderPort()).put(message);
             }
             catch (InterruptedException ie)
             {

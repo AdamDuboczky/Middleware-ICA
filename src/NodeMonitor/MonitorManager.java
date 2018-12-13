@@ -5,12 +5,8 @@
  */
 package NodeMonitor;
 
-import Agents.Portal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -23,7 +19,7 @@ public class MonitorManager implements Runnable
 
     public MonitorManager()
     {
-        this.monitors = new HashMap<>();
+        this.monitors = new ConcurrentHashMap<>();
         thread = new Thread(this);
     }
     //End of MonitorManager constructor
@@ -53,12 +49,14 @@ public class MonitorManager implements Runnable
     {
         while(true)
         {
+            
             monitors.forEach((t, u) ->
             {
                 if(t.getLogSize() > u)
-                {
+                {                    
+                    System.out.println(u);
                     System.out.println(t.grabUpdate(u).toString()); 
-                    u =+ 1;
+                    monitors.replace(t, new Integer(u.intValue()+1));
                 }
             });
         }

@@ -63,5 +63,26 @@ public class SystemMsg implements Message
         return inner.getDestPortType();
     }
     //End of getDestPortType
+    
+    @Override
+    public PortalTypes getSenderPort()
+    {
+        Message m = this;
+        
+        while(this.inner.getSenderPort() != null)
+        {
+            m = inner;
+        }
+        
+        return m.getPortVisited();
+    }
+    //End of getSenderPort
+    
+    @Override
+    public PortalTypes getPortVisited()
+    {
+        return portalVisited;
+    }
+    //End of getPortVisited
 }
 //End of SystemMsg class
