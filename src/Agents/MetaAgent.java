@@ -24,6 +24,12 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     protected Portal superAgent;
     protected NodeMonitor monitor;
     
+    /**
+     * MetaAgent constructor
+     * 
+     * @param name Name of meta agent
+     * @param superAgent Portal to be attached to.
+     */
     public MetaAgent(String name, Portal superAgent)
     {
         super();
@@ -54,6 +60,11 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     }
     //End of getSuperAgent
     
+    /**
+     * Set the portal for the meta agent to be attached to.
+     * 
+     * @param superAgent Portal to be attached to.
+     */
     private void setSuperAgent(Portal superAgent)
     {
         this.superAgent = superAgent;

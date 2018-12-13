@@ -23,6 +23,13 @@ public class Portal extends MetaAgent
      private volatile Map<String, MetaAgent> agentTable;
      protected PortalTypes portalType;
      
+     /**
+      * Portal constructor
+      * 
+      * @param portalType Type of portal
+      * @param name Name of agent
+      * @param superAgent Agent pointer
+      */
      public Portal(PortalTypes portalType, String name, Portal superAgent)
      {
         super(name, superAgent);
@@ -31,6 +38,13 @@ public class Portal extends MetaAgent
      }
      //End of Portal default constructor
 
+     /**
+      * Checks if agent already exists with the given name.
+      * If it does exist, concatenate the given name with +1 to avoid exceptions.  
+      * 
+      * @param name Name of Agent
+      * @return Valid agent name
+      */
     public String checkValidName(String name)
     {
         boolean valid = false;
@@ -51,12 +65,22 @@ public class Portal extends MetaAgent
     }
     //End of checkValidName
 
+    /**
+     * Insert the meta agent into the 'table'.
+     * 
+     * @param agent Agent to be added to super type.
+     * @param name Name of agent
+     */
     public void registerWithSuper(MetaAgent agent, String name)
     {
         agentTable.put(name, agent);
     }
     //End of registerWithSuper
 
+    /**
+     * 
+     * @param msg Message to be sent.
+     */
     @Override
     protected void messageHandler(Message msg)
     {   
