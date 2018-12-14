@@ -49,14 +49,13 @@ public class MonitorManager implements Runnable
     {
         while(true)
         {
-            
             monitors.forEach((t, u) ->
             {
                 if(t.getLogSize() > u)
                 {                    
                     System.out.println(u);
                     System.out.println(t.grabUpdate(u).toString()); 
-                    monitors.replace(t, new Integer(u.intValue()+1));
+                    monitors.replace(t, new Integer(u+1));
                 }
             });
         }

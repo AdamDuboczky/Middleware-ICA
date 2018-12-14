@@ -9,8 +9,6 @@ package Agents;
 import Message.Message;
 import Message.SysMsgTypes;
 import Message.SystemMsg;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,63 +17,18 @@ import java.util.logging.Logger;
  * @author T-A-T
  */
 public class Portal extends MetaAgent
-{
-     private volatile Map<String, MetaAgent> agentTable;
-     protected PortalTypes portalType;
-     
+{    
      /**
       * Portal constructor
       * 
       * @param portalType Type of portal
-      * @param name Name of agent
       * @param superAgent Agent pointer
       */
-     public Portal(PortalTypes portalType, String name, Portal superAgent)
+     public Portal(PortalTypes portalType, MetaAgent superAgent)
      {
-        super(name, superAgent);
-        this.portalType = portalType;
-        agentTable = new ConcurrentHashMap<>();
+        super(portalType.name(), superAgent);
      }
      //End of Portal default constructor
-
-     /**
-      * Checks if agent already exists with the given name.
-      * If it does exist, concatenate the given name with +1 to avoid exceptions.  
-      * 
-      * @param name Name of Agent
-      * @return Valid agent name
-      */
-    public String checkValidName(String name)
-    {
-        boolean valid = false;
-        
-        while(valid == false)
-        {
-            if(agentTable.containsKey(name))
-            {
-                name += "1";
-            }
-            else
-            {
-                valid = true;
-            }
-        }
-        
-        return name;
-    }
-    //End of checkValidName
-
-    /**
-     * Insert the meta agent into the 'table'.
-     * 
-     * @param agent Agent to be added to super type.
-     * @param name Name of agent
-     */
-    public void registerWithSuper(MetaAgent agent, String name)
-    {
-        agentTable.put(name, agent);
-    }
-    //End of registerWithSuper
 
     /**
      * 
@@ -84,11 +37,11 @@ public class Portal extends MetaAgent
     @Override
     protected void messageHandler(Message msg)
     {   
-        if (msg.getDestPortType().equals(this.portalType))
+        if (msg.getDestPortType().equals(this.name))
         {
             if (agentTable.containsKey(msg.getDestination()))
             {
-                Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.VALID);
+                Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
                 
                 try
                 {
@@ -101,7 +54,7 @@ public class Portal extends MetaAgent
             }
             else
             {
-                Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.NOTFOUND);
+                Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
                 
                 try
                 {
@@ -113,9 +66,9 @@ public class Portal extends MetaAgent
                 }
             }
         }
-        else if(msg.getDestPortType() == PortalTypes.BROAD)
+        else if(msg.getDestPortType() == null ? PortalTypes.BROAD.name() == null : msg.getDestPortType().equals(PortalTypes.BROAD.name()))
         {
-            Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.VALID);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
             
             agentTable.forEach((t, u) ->
             {
@@ -136,16 +89,16 @@ public class Portal extends MetaAgent
         }
         else if (getSuperAgent() != null)
         {
-            Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.NOTFOUND);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             pushToSuper(message);
         }
         else
         {
-            Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.NOTFOUND);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             
             try
             {
-                agentTable.get(message.getSenderPort()).put(message);
+                agentTable.get(message.getSender()).put(message);
             }
             catch (InterruptedException ie)
             {
