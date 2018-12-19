@@ -8,7 +8,6 @@ package Agents;
 
 import Message.Message;
 import Message.SysMsgTypes;
-import Message.UserMsg;
 
 /**
  *
@@ -16,17 +15,11 @@ import Message.UserMsg;
  */
 public class UserAgent extends MetaAgent
 {   
-    public UserAgent(String name, Portal superAgent)
+    public UserAgent(String name, MetaAgent superAgent)
     {
         super(name, superAgent);
     }
     //End of UserAgent default constructor
-    
-    public void sendMessage(PortalTypes destPType, String dest, String message)
-    {
-        superAgent.pushToSuper(new UserMsg(destPType, dest, message, this.name));
-    }
-    //End of sendMessage
 
     @Override
     protected void messageHandler(Message message)

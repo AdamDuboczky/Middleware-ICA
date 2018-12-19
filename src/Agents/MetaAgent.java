@@ -7,8 +7,12 @@
 package Agents;
 
 import Message.Message;
+import Message.RegisterMsg;
+import Message.UserMsg;
 import NodeMonitor.Monitorable;
 import NodeMonitor.NodeMonitor;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,15 +25,23 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
 {
     protected String name;
     protected final Thread thread;
-    protected Portal superAgent;
+    protected MetaAgent superAgent;
     protected NodeMonitor monitor;
+    protected volatile Map<String, MetaAgent> agentTable;
     
-    public MetaAgent(String name, Portal superAgent)
+    /**
+     * MetaAgent constructor
+     * 
+     * @param name Name of meta agent
+     * @param superAgent Portal to be attached to.
+     */
+    public MetaAgent(String name, MetaAgent superAgent)
     {
         super();
-        thread = new Thread(this);
-        setName(name);
+        agentTable = new HashMap<>();
         setSuperAgent(superAgent);
+        setName(name);
+        thread = new Thread(this);
     }
     //End of MetaAgent default constructor
     
@@ -48,22 +60,59 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     }
     //End of setName
     
+    /**
+      * Checks if agent already exists with the given name.
+      * If it does exist, concatenate the given name with +1 to avoid exceptions.  
+      * 
+      * @param name Name of Agent
+      * @return Valid agent name
+      */
+    private String checkValidName(String name)
+    {
+        boolean valid = false;
+        
+        while(valid == false)
+        {
+            if(agentTable.containsKey(name))
+            {
+                name += "1";
+            }
+            else
+            {
+                valid = true;
+            }
+        }
+        
+        return name;
+    }
+    //End of checkValidName
+    
     public MetaAgent getSuperAgent()
     {
         return superAgent;
     }
     //End of getSuperAgent
     
-    private void setSuperAgent(Portal superAgent)
+    /**
+     * Set the portal for the meta agent to be attached to.
+     * @param superAgent
+     */
+    private void setSuperAgent(MetaAgent superAgent)
     {
         this.superAgent = superAgent;
         
         if(this.superAgent != null)
         {
-            this.superAgent.registerWithSuper(this, this.name);
+            this.pushToSuper(new RegisterMsg(this));
         }
     }
     //End of setSuperAgent
+    
+    private void registerAgent(MetaAgent agent)
+    {
+        this.agentTable.put(agent.name, agent);
+    }
+    //End of registerAgent
     
     public void pushToSuper(Message message)
     {
@@ -81,19 +130,28 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     }
     //End of pushToSuper
     
+    public void sendMessage(PortalTypes destPType, String dest, String message)
+    {
+        pushToSuper(new UserMsg(destPType.name(), dest, message, this.name));
+    }
+    //End of sendMessage
+    
     @Override
     public void run()
     {
         while(true)
         {
-            try
+            if(!this.isEmpty())
             {
-                handleMessage(take());
-            }
-            catch (InterruptedException ie)
-            {
-                Logger.getLogger(MetaAgent.class.getName()).log(Level.SEVERE, null, ie);
-            }
+                try
+                {
+                    handleMessage(take());
+                }
+                catch (InterruptedException ie)
+                {
+                    Logger.getLogger(MetaAgent.class.getName()).log(Level.SEVERE, null, ie);
+                }
+            } 
         }
     }
     //End of run
@@ -125,7 +183,8 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     }
     //End of hasMonitor
     
-    protected void updateMonitor(Message message)
+    @Override
+    public void updateMonitor(Message message)
     {
         if(this.monitor != null)
         {
@@ -138,8 +197,19 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     {
         if(message != null)
         {
-            updateMonitor(message);
-            messageHandler(message);
+            if(hasMonitor())
+            {
+                updateMonitor(message);
+            }
+            
+            if(message.getAgent() != null)
+            {
+                this.registerAgent(message.getAgent());
+            }
+            else
+            {
+                messageHandler(message);
+            }
         }
     }
     //End of handleMessage

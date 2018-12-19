@@ -6,7 +6,7 @@
 
 package Message;
 
-import Agents.PortalTypes;
+import Agents.MetaAgent;
 
 /**
  *
@@ -20,8 +20,14 @@ public interface Message
     
     public abstract String getSender();
     
-    public abstract PortalTypes getDestPortType();
+    public abstract String getDestPortType();
     
     public abstract SysMsgTypes getSysMessage();
+    
+    public abstract String getSenderPort();
+    
+    public abstract String getPortVisited();
+    
+    public abstract MetaAgent getAgent();
 }
 //End of Message interface

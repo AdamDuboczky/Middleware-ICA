@@ -6,7 +6,7 @@
 
 package Message;
 
-import Agents.PortalTypes;
+import Agents.MetaAgent;
 import java.time.LocalDateTime;
 
 /**
@@ -18,10 +18,10 @@ public class UserMsg implements Message
     private final String message;
     private final String destination;
     private final String sender;
-    private final PortalTypes destPortalType;
+    private final String destPortalType;
     private final LocalDateTime timeStamp;
     
-    public UserMsg(PortalTypes destPortalType, String destination, String message, String sender)
+    public UserMsg(String destPortalType, String destination, String message, String sender)
     {
         this.destPortalType = destPortalType;
         this.destination = destination;
@@ -59,10 +59,30 @@ public class UserMsg implements Message
     //End of getSysMessage
 
     @Override
-    public PortalTypes getDestPortType()
+    public String getDestPortType()
     {
         return destPortalType;
     }
     //End of getDestPortType
+
+    @Override
+    public String getSenderPort()
+    {
+        return null;
+    }
+    //End of getSenderPort
+
+    @Override
+    public String getPortVisited()
+    {
+        return null;
+    }
+    //End of getPortVisited
+
+    @Override
+    public MetaAgent getAgent()
+    {
+        return null;
+    }
 }
 //End of User class

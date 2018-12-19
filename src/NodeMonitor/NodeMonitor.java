@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class NodeMonitor
 {
-    private List<Message> messageLog;
+    private volatile List<Message> messageLog;
     
     public NodeMonitor()
     {
@@ -32,5 +32,17 @@ public class NodeMonitor
         }
     }
     //End of updateMonitor
+    
+    public int getLogSize()
+    {
+        return messageLog.size();
+    }
+    //End of getLogSize
+    
+    public Message grabUpdate(int index)
+    {
+        return messageLog.get(index);
+    }
+    //End of grabUpdate
 }
 //End of NodeMonitor class
