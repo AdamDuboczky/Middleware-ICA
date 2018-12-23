@@ -9,7 +9,7 @@ package Agents;
 import Message.Message;
 import Message.SysMsgTypes;
 import Message.SystemMsg;
-import java.util.Map;
+import static Simulation.Main.exec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,26 +19,25 @@ import java.util.logging.Logger;
  */
 public class PortalHub extends Portal
 {
-    private volatile Map<PortalTypes, MetaAgent> agentTable;
-    
-    public PortalHub(PortalTypes portType, String name, Portal superAgent)
+    public PortalHub(PortalTypes portType, MetaAgent superAgent)
     {
-        super(portType, name, superAgent);
+        super(portType, superAgent);
     }
     //End of PortalHub default constructor
     
     @Override
     protected void messageHandler(Message msg)
     {
-        if(msg.getDestPortType() == PortalTypes.BROAD)
+        if(msg.getDestPortType() == null ? PortalTypes.BROAD.name() == null : msg.getDestPortType().equals(PortalTypes.BROAD.name()))
         {
-            Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.VALID);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
             
             agentTable.forEach((t, u) ->
             {
                 try
                 {
                     u.put(message);
+                    exec.execute(u);
                 }
                 catch (InterruptedException ex)
                 {
@@ -53,11 +52,12 @@ public class PortalHub extends Portal
         }
         else if(agentTable.containsKey(msg.getDestPortType()))
         {
-            Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.VALID);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
             
             try
             {
                 agentTable.get(message.getDestPortType()).put(message);
+                exec.execute(agentTable.get(message.getDestPortType()));
             }
             catch (InterruptedException ie)
             {
@@ -66,16 +66,17 @@ public class PortalHub extends Portal
         }
         else if (getSuperAgent() != null)
         {
-            Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.NOTFOUND);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             pushToSuper(message);
         }
         else
         {
-            Message message = new SystemMsg(msg, this.portalType, SysMsgTypes.NOTFOUND);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             
             try
             {
-                agentTable.get(message.getDestPortType()).put(message);
+                agentTable.get(msg.getLastAgent()).put(message);
+                exec.execute(agentTable.get(msg.getLastAgent()));
             }
             catch (InterruptedException ie)
             {

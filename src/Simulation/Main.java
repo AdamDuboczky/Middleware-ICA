@@ -6,10 +6,17 @@
 
 package Simulation;
 
+import Agents.MetaAgent;
 import Agents.Portal;
 import Agents.PortalHub;
 import Agents.PortalTypes;
 import Agents.UserAgent;
+import NodeMonitor.MonitorManager;
+import NodeMonitor.NodeMonitor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -17,39 +24,66 @@ import Agents.UserAgent;
  */
 public class Main 
 {
-
+    public static ExecutorService exec = new ThreadPoolExecutor(5, 10, 2, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) 
     {
-        //Creates a which all of the portals are connected to
-        PortalHub hub = new PortalHub(PortalTypes.HUB, "Portal Hub", null);
-        //Creates the portals and creates the links to the hub
-        Portal p1 = new Portal(PortalTypes.ONE, "P1", hub);
-        Portal p2 = new Portal(PortalTypes.TWO, "p2", hub);
-        Portal p3 = new Portal(PortalTypes.THREE, "p3", hub);
-        Portal p4 = new Portal(PortalTypes.FOUR, "p4", hub);
+        //Creates a MonitorManager that manges all the node monitors, pulling their information for inspection.
+        MonitorManager manager = new MonitorManager();
+        exec.execute(manager);
+        
+        //Creates NodeMonitor and add to portals/agents and MonitorManager
+        
+        //Creates a hub to which all of the portals are connected.
+        MetaAgent hub = new PortalHub(PortalTypes.HUB, null);
+        NodeMonitor n7 = new NodeMonitor();
+        hub.addMonitor(n7);
+        manager.addMonitor(n7);
+        exec.execute(hub);
+        
+        //Creates the portals and creates the links to the hub.
+        MetaAgent p1 = new Portal(PortalTypes.ATC, hub);
+        NodeMonitor n1 = new NodeMonitor();
+        p1.addMonitor(n1);
+        manager.addMonitor(n1);
+        exec.execute(p1);
+        MetaAgent p2 = new Portal(PortalTypes.BAG, hub);
+        NodeMonitor n2 = new NodeMonitor();
+        p2.addMonitor(n2);
+        manager.addMonitor(n2);
+        exec.execute(p2);
+        MetaAgent p3 = new Portal(PortalTypes.SEC, hub);
+        NodeMonitor n3 = new NodeMonitor();
+        p3.addMonitor(n3);
+        manager.addMonitor(n3);
+        exec.execute(p3);
+
         //Creates the agents and links them to the portals
-        UserAgent a1 = new UserAgent("a1", p1);
-        UserAgent a2 = new UserAgent("a2", p4);
-        //Agent.registerWithSuper(a1, "Agent1") ??????
-        a1.sendMessage(PortalTypes.FOUR, "a2" , "you smell");
+        MetaAgent a1 = new UserAgent("Airplane", p1);
+        NodeMonitor n4 = new NodeMonitor();
+        a1.addMonitor(n4);
+        manager.addMonitor(n4);
+        exec.execute(a1);
+        MetaAgent a2 = new UserAgent("Ground Staff", p2);
+        NodeMonitor n5 = new NodeMonitor();
+        a2.addMonitor(n5);
+        manager.addMonitor(n5);
+        exec.execute(a2);
+        MetaAgent a3 = new UserAgent("Officer", p3);
+        NodeMonitor n6 = new NodeMonitor();
+        a3.addMonitor(n6);
+        manager.addMonitor(n6);
+        exec.execute(a3);
         
-        
-        /*
-        Needs to create portal hub,
-        then all portals attached to it,
-        then user agents attached to those.
-        
-        Also make monitors and attach those to the above objects,
-        or the same monitor for all of them.
-        
-        Said monitor(s) need to be able to display when an update is recieved,
-        so either a GUI/console interface needs to be made with a sepreate
-        thread that can pull the information from the monitors, or the monitors
-        need to themselves have threads and display(sout or GUI) themselves.
-        */
+        //Sending test messages
+        a3.sendMessage(PortalTypes.ATC, "Airplane" , "you smell");              //Correct
+        a2.sendMessage(PortalTypes.SEC, "Officer", "Immigrant in the airport"); //Correct
+//        a1.sendMessage(PortalTypes.BAG, "Airplane" , "OMG!");                   //Wrong: wrong portal and trying to send to itself
+        a2.sendMessage(PortalTypes.ATC, "Airplane", "Plane inbound");           //Correct
+//        a3.sendMessage(PortalTypes.ATC, "Bob" , "I love you");                  //Wrong: No user named bob
+//        a2.sendMessage(PortalTypes.BROAD, "All", "The airport id now closing"); //Broadcast
     }
     //End of main
 }

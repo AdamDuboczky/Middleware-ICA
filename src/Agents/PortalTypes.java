@@ -12,6 +12,6 @@ package Agents;
  */
 public enum PortalTypes 
 {
-    BROAD,HUB,ONE,TWO,THREE,FOUR;
+    BROAD,HUB,ATC,BAG,SEC;
 }
 //End of PortalTypes enum
