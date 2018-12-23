@@ -118,7 +118,6 @@ public class UserMsg implements Message
     @Override
     public String getPortVisited()
     {
-        return null;
         return sender;
     }
     //End of getPortVisited
@@ -130,6 +129,12 @@ public class UserMsg implements Message
     public MetaAgent getAgent()
     {
         return null;
+    }
+
+    @Override
+    public String getSenderPort()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 //End of User class
