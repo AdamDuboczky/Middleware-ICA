@@ -24,9 +24,7 @@ public interface Message
     
     public abstract SysMsgTypes getSysMessage();
     
-    public abstract String getSenderPort();
-    
-    public abstract String getPortVisited();
+    public abstract String getLastAgent();
     
     public abstract MetaAgent getAgent();
 }

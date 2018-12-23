@@ -11,7 +11,7 @@ import Message.RegisterMsg;
 import Message.UserMsg;
 import NodeMonitor.Monitorable;
 import NodeMonitor.NodeMonitor;
-import java.util.HashMap;
+import static Simulation.Main.exec;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements Runnable, Monitorable
 {
     protected String name;
-    protected final Thread thread;
     protected MetaAgent superAgent;
     protected NodeMonitor monitor;
     protected volatile Map<String, MetaAgent> agentTable;
@@ -38,10 +37,8 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     public MetaAgent(String name, MetaAgent superAgent)
     {
         super();
-        agentTable = new HashMap<>();
         setSuperAgent(superAgent);
         setName(name);
-        thread = new Thread(this);
     }
     //End of MetaAgent default constructor
     
@@ -121,6 +118,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
             try
             {
                 superAgent.put(message);
+                exec.execute(superAgent);
             }
             catch(InterruptedException ie)
             {
@@ -133,34 +131,26 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     public void sendMessage(PortalTypes destPType, String dest, String message)
     {
         pushToSuper(new UserMsg(destPType.name(), dest, message, this.name));
+        
     }
     //End of sendMessage
     
     @Override
     public void run()
     {
-        while(true)
+        while(!this.isEmpty())
         {
-            if(!this.isEmpty())
+            try
             {
-                try
-                {
-                    handleMessage(take());
-                }
-                catch (InterruptedException ie)
-                {
-                    Logger.getLogger(MetaAgent.class.getName()).log(Level.SEVERE, null, ie);
-                }
-            } 
+                handleMessage(take());
+            }
+            catch (InterruptedException ie)
+            {
+                Logger.getLogger(MetaAgent.class.getName()).log(Level.SEVERE, null, ie);
+            }
         }
     }
     //End of run
-    
-    public void start()
-    {
-        thread.start();
-    }
-    //End of start
 
     @Override
     public void addMonitor(NodeMonitor monitor)

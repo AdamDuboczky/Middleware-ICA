@@ -9,6 +9,7 @@ package Agents;
 import Message.Message;
 import Message.SysMsgTypes;
 import Message.SystemMsg;
+import static Simulation.Main.exec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,6 +37,7 @@ public class PortalHub extends Portal
                 try
                 {
                     u.put(message);
+                    exec.execute(u);
                 }
                 catch (InterruptedException ex)
                 {
@@ -55,6 +57,7 @@ public class PortalHub extends Portal
             try
             {
                 agentTable.get(message.getDestPortType()).put(message);
+                exec.execute(agentTable.get(message.getDestPortType()));
             }
             catch (InterruptedException ie)
             {
@@ -72,7 +75,8 @@ public class PortalHub extends Portal
             
             try
             {
-                agentTable.get(message.getSenderPort()).put(message);
+                agentTable.get(msg.getLastAgent()).put(message);
+                exec.execute(agentTable.get(msg.getLastAgent()));
             }
             catch (InterruptedException ie)
             {

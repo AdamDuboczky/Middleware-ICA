@@ -18,13 +18,13 @@ public class SystemMsg implements Message
     private final Message inner;
     private final SysMsgTypes systemMsg;
     private final LocalDateTime timeStamp;
-    private final String portalVisited;
+    private final String lastAgent;
     
-    public SystemMsg(Message inner, String portalVisited, SysMsgTypes systemMsg)
+    public SystemMsg(Message inner, String lastAgent, SysMsgTypes systemMsg)
     {
         this.inner = inner;
         this.systemMsg = systemMsg;
-        this.portalVisited = portalVisited;
+        this.lastAgent = lastAgent;
         this.timeStamp = LocalDateTime.now();
     }
     //End of SystemMsg default constructor
@@ -65,23 +65,9 @@ public class SystemMsg implements Message
     //End of getDestPortType
     
     @Override
-    public String getSenderPort()
+    public String getLastAgent()
     {
-        Message m = this;
-        
-        while(this.inner.getSenderPort() != null)
-        {
-            m = inner;
-        }
-        
-        return m.getPortVisited();
-    }
-    //End of getSenderPort
-    
-    @Override
-    public String getPortVisited()
-    {
-        return portalVisited;
+        return lastAgent;
     }
     //End of getPortVisited
     

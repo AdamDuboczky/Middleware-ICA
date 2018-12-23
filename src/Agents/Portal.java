@@ -9,6 +9,8 @@ package Agents;
 import Message.Message;
 import Message.SysMsgTypes;
 import Message.SystemMsg;
+import static Simulation.Main.exec;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +29,7 @@ public class Portal extends MetaAgent
      public Portal(PortalTypes portalType, MetaAgent superAgent)
      {
         super(portalType.name(), superAgent);
+        agentTable = new HashMap<>();
      }
      //End of Portal default constructor
 
@@ -46,19 +49,21 @@ public class Portal extends MetaAgent
                 try
                 {
                     agentTable.get(message.getDestination()).put(message);
+                    exec.execute(agentTable.get(message.getDestination()));
                 }
                 catch (InterruptedException ex)
                 {
                     Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            else
+            else if(agentTable.containsKey(msg.getLastAgent()))
             {
                 Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
                 
                 try
                 {
-                    agentTable.get(message.getDestination()).put(message);
+                    agentTable.get(msg.getLastAgent()).put(message);
+                    exec.execute(agentTable.get(msg.getLastAgent()));
                 }
                 catch (InterruptedException ie)
                 {
@@ -75,6 +80,7 @@ public class Portal extends MetaAgent
                 try
                 {
                     u.put(message);
+                    exec.execute(u);
                 }
                 catch (InterruptedException ex)
                 {
@@ -98,7 +104,8 @@ public class Portal extends MetaAgent
             
             try
             {
-                agentTable.get(message.getSender()).put(message);
+                agentTable.get(message.getLastAgent()).put(message);
+                exec.execute(agentTable.get(message.getLastAgent()));
             }
             catch (InterruptedException ie)
             {

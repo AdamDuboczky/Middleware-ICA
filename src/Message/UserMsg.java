@@ -66,16 +66,9 @@ public class UserMsg implements Message
     //End of getDestPortType
 
     @Override
-    public String getSenderPort()
+    public String getLastAgent()
     {
-        return null;
-    }
-    //End of getSenderPort
-
-    @Override
-    public String getPortVisited()
-    {
-        return null;
+        return sender;
     }
     //End of getPortVisited
 

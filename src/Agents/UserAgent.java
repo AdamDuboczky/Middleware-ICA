@@ -30,7 +30,7 @@ public class UserAgent extends MetaAgent
         }
         else if(message.getSysMessage() == SysMsgTypes.VALID)
         {
-            System.out.println("zzz  User agent " + this.name + " got a message. zzz");
+            System.out.println("zzz  User agent " + this.name + " got a message: " + message.getUserMessage() + " zzz");
         }
     }
     //End of messageHandler
