@@ -38,10 +38,13 @@ public class SystemMsg implements Message
      * @param systemMsg The status of the current system message
      */
     public SystemMsg(Message inner, String portalVisited, SysMsgTypes systemMsg)
+    private final String lastAgent;
+    
+    public SystemMsg(Message inner, String lastAgent, SysMsgTypes systemMsg)
     {
         this.inner = inner;
         this.systemMsg = systemMsg;
-        this.portalVisited = portalVisited;
+        this.lastAgent = lastAgent;
         this.timeStamp = LocalDateTime.now();
     }
     //End of SystemMsg default constructor
@@ -100,7 +103,7 @@ public class SystemMsg implements Message
      * @return the name of the portal which sent the message as a string
      */
     @Override
-    public String getSenderPort()
+    public String getLastAgent()
     {
         Message m = this;
         
@@ -120,6 +123,7 @@ public class SystemMsg implements Message
     public String getPortVisited()
     {
         return portalVisited;
+        return lastAgent;
     }
     //End of getPortVisited
     /**

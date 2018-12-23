@@ -53,6 +53,9 @@ public interface Message
      * Gets the agent that sent the message
      * @return returns the agent which sent the message
      */
+    
+    public abstract String getLastAgent();
+    
     public abstract MetaAgent getAgent();
 }
 //End of Message interface

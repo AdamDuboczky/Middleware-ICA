@@ -5,8 +5,8 @@
  */
 package NodeMonitor;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -14,13 +14,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MonitorManager implements Runnable
 {
-    private final Map<NodeMonitor, Integer> monitors;
-    protected final Thread thread;
+    private volatile Map<NodeMonitor, Integer> monitors;
 
     public MonitorManager()
     {
-        this.monitors = new ConcurrentHashMap<>();
-        thread = new Thread(this);
+        this.monitors = new HashMap<>();
     }
     //End of MonitorManager constructor
     
@@ -37,12 +35,6 @@ public class MonitorManager implements Runnable
             monitors.remove(monitor);
         }
     }
-    
-    public void start()
-    {
-        thread.start();
-    }
-    //End of start
         
     @Override
     public void run()
@@ -52,9 +44,8 @@ public class MonitorManager implements Runnable
             monitors.forEach((t, u) ->
             {
                 if(t.getLogSize() > u)
-                {                    
-                    System.out.println(u);
-                    System.out.println(t.grabUpdate(u).toString()); 
+                {
+                    System.out.println(t.grabUpdate(u).getSender());
                     monitors.replace(t, new Integer(u+1));
                 }
             });

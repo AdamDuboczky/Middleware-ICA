@@ -33,7 +33,7 @@ public class RegisterMsg implements Message
     @Override
     public String getUserMessage()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
      /**
      * Not implemented in this version
@@ -42,7 +42,7 @@ public class RegisterMsg implements Message
     @Override
     public String getDestination()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
     /**
      * Not implemented in this version
@@ -51,7 +51,7 @@ public class RegisterMsg implements Message
     @Override
     public String getSender()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Agent: " + agent.getName() + " registering with super";
     }
     /**
      * Not implemented in this version
@@ -60,7 +60,7 @@ public class RegisterMsg implements Message
     @Override
     public String getDestPortType()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
     /**
      * Not implemented in this version
@@ -69,14 +69,14 @@ public class RegisterMsg implements Message
     @Override
     public SysMsgTypes getSysMessage()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
     /**
      * Not implemented in this version
      * @return 
      */
     @Override
-    public String getSenderPort()
+    public String getLastAgent()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -88,6 +88,7 @@ public class RegisterMsg implements Message
     public String getPortVisited()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return agent.getName();
     }
     /**
      * Gets the agent which sent the message

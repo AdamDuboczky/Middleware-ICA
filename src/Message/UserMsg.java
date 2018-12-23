@@ -106,7 +106,7 @@ public class UserMsg implements Message
      * @return 
      */
     @Override
-    public String getSenderPort()
+    public String getLastAgent()
     {
         return null;
     }
@@ -119,6 +119,7 @@ public class UserMsg implements Message
     public String getPortVisited()
     {
         return null;
+        return sender;
     }
     //End of getPortVisited
     /**
