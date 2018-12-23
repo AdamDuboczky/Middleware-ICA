@@ -30,14 +30,12 @@ public class SystemMsg implements Message
     /**
      * All of the portals which the message has been in/on
      */
-    private final String portalVisited;
     /**
      * Constructor for system message used to create the wrappee for user message
      * @param inner The user message which is inside of the system message
      * @param portalVisited All of the portals which the message has visited
      * @param systemMsg The status of the current system message
      */
-    public SystemMsg(Message inner, String portalVisited, SysMsgTypes systemMsg)
     private final String lastAgent;
     
     public SystemMsg(Message inner, String lastAgent, SysMsgTypes systemMsg)
@@ -122,7 +120,6 @@ public class SystemMsg implements Message
     @Override
     public String getPortVisited()
     {
-        return portalVisited;
         return lastAgent;
     }
     //End of getPortVisited
@@ -134,6 +131,12 @@ public class SystemMsg implements Message
     public MetaAgent getAgent()
     {
         return null;
+    }
+
+    @Override
+    public String getSenderPort()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 //End of SystemMsg class

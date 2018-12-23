@@ -87,7 +87,6 @@ public class RegisterMsg implements Message
     @Override
     public String getPortVisited()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return agent.getName();
     }
     /**
@@ -98,6 +97,12 @@ public class RegisterMsg implements Message
     public MetaAgent getAgent()
     {
         return agent;
+    }
+
+    @Override
+    public String getSenderPort()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 //End of RegisterMsg class
