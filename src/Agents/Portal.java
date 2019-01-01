@@ -40,77 +40,88 @@ public class Portal extends MetaAgent
     @Override
     protected void messageHandler(Message msg)
     {   
-        if (msg.getDestPortType().equals(this.name))
+        if(msg.getDestPortType() == null ? PortalTypes.BROAD.name() == null : msg.getDestPortType().equals(PortalTypes.BROAD.name())) //Check if message = broadcast/null
         {
-            if (agentTable.containsKey(msg.getDestination()))
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
+            
+            agentTable.forEach((t, u) ->    //Distribute to all agents, but the sender
             {
-                Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
-                
-                try
+                if(!u.getName().equals(msg.getLastAgent()))
                 {
-                    agentTable.get(message.getDestination()).put(message);
-                    exec.execute(agentTable.get(message.getDestination()));
+                    try
+                    {
+                        u.put(message);
+                        exec.execute(u);
+                    }
+                    catch (InterruptedException ex)
+                    {
+                        Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                catch (InterruptedException ex)
-                {
-                    Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            });
+            
+            if(getSuperAgent() != null && !msg.getLastAgent().equals(getSuperAgent().getName())) //Broadcast message to super if it hasn't already
+            {
+                pushToSuper(message);
             }
-            else if(agentTable.containsKey(msg.getLastAgent()))
+        }
+        else if (msg.getDestPortType().equals(this.name) && agentTable.containsKey(msg.getDestination())) //Check to see if correct portal & has recipient
+        {
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
+                
+            try
+            {
+                agentTable.get(message.getDestination()).put(message);
+                exec.execute(agentTable.get(message.getDestination()));
+            }
+            catch (InterruptedException ex)
+            {
+                Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if(msg.getDestPortType().equals(this.name) && agentTable.containsKey(msg.getSender())) //Check to see if correct portal & has sender
+        {
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
+
+            try
+            {
+                agentTable.get(msg.getSender()).put(message);
+                exec.execute(agentTable.get(msg.getSender()));
+            }
+            catch (InterruptedException ie)
+            {
+                Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ie);
+            }
+        }
+        else if((!msg.getLastAgent().equals(msg.getSender())) && msg.getSenderPort().equals(name)) //Check to see if this is senders portal & sender isn't last agent
+        {
+            if(agentTable.containsKey(msg.getSender())) //Check for sender in senders port
             {
                 Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
-                
+
                 try
                 {
-                    agentTable.get(msg.getLastAgent()).put(message);
-                    exec.execute(agentTable.get(msg.getLastAgent()));
+                    agentTable.get(msg.getSender()).put(message);
+                    exec.execute(agentTable.get(msg.getSender()));
                 }
                 catch (InterruptedException ie)
                 {
                     Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ie);
                 }
             }
-        }
-        else if(msg.getDestPortType() == null ? PortalTypes.BROAD.name() == null : msg.getDestPortType().equals(PortalTypes.BROAD.name()))
-        {
-            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
-            
-            agentTable.forEach((t, u) ->
+            else //Log no recipient & no sender
             {
-                try
-                {
-                    u.put(message);
-                    exec.execute(u);
-                }
-                catch (InterruptedException ex)
-                {
-                    Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-            
-            if(getSuperAgent() != null)
-            {
-                pushToSuper(message);
+                Logger.getLogger(name).log(Level.INFO, "Message from {0} couldn't find a recipient, and is itself unavailable", msg.getSender());
             }
         }
-        else if (getSuperAgent() != null)
+        else if(getSuperAgent() != null) //Check to see if super exists to send message
         {
             Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             pushToSuper(message);
         }
-        else
+        else //Log that message time out, no recipient &/or no sender.
         {
-            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
-            
-            try
-            {
-                agentTable.get(message.getLastAgent()).put(message);
-                exec.execute(agentTable.get(message.getLastAgent()));
-            }
-            catch (InterruptedException ie)
-            {
-                Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ie);
-            }
+            Logger.getLogger(name).log(Level.INFO, "Message from {0} timed out or couldn't find a recipient, and is itself unavailable", msg.getSender());
         }
     }
     //End of messageHandler
