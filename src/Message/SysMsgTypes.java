@@ -7,11 +7,11 @@
 package Message;
 
 /**
- * Used to generate a message code for the message(VALID, NOTFOUND or ERROR)
- * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
+ *
+ * @author T-A-T
  */
 public enum SysMsgTypes 
 {
     VALID, NOTFOUND, ERROR;
 }
-//End of SysMsgTypes enum
+//End of SysMsgTypes class

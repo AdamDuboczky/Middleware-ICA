@@ -10,89 +10,53 @@ import Agents.MetaAgent;
 
 /**
  *
- * @authors Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
+ * @author T-A-T
  */
 public class RegisterMsg implements Message
 {
-    /**
-     * The agent which sent the registration message
-     */
     public MetaAgent agent;
-    /**
-     * Constructor for RegisterMsg, used to create a register message
-     * @param agent Used to keep track of the agent which sent the message
-     */
+    
     public RegisterMsg(MetaAgent agent)
     {
         this.agent = agent;
     }
-    /**
-     * Not implemented in this version
-     * @return 
-     */
+    
     @Override
     public String getUserMessage()
     {
         return null;
     }
-     /**
-     * Not implemented in this version
-     * @return 
-     */
+
     @Override
     public String getDestination()
     {
         return null;
     }
-    /**
-     * Not implemented in this version
-     * @return 
-     */
+
     @Override
     public String getSender()
     {
         return "Agent: " + agent.getName() + " registering with super";
     }
-    /**
-     * Not implemented in this version
-     * @return 
-     */
+
     @Override
     public String getDestPortType()
     {
         return null;
     }
-    /**
-     * Not implemented in this version
-     * @return 
-     */
+
     @Override
     public SysMsgTypes getSysMessage()
     {
         return null;
     }
-    /**
-     * Not implemented in this version
-     * @return 
-     */
+
     @Override
-    public String getLastAgent()
+    public String getSenderPort()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
-    /**
-     * Not implemented in this version
-     * @return 
-     */
-    @Override
-    public String getPortVisited()
-    {
-        return agent.getName();
-    }
-    /**
-     * Gets the agent which sent the message
-     * @return the agent which sent the message
-     */
+
     @Override
     public MetaAgent getAgent()
     {
@@ -100,9 +64,15 @@ public class RegisterMsg implements Message
     }
 
     @Override
-    public String getSenderPort()
+    public int getHopCount()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 1;
+    }
+
+    @Override
+    public String getLastAgent()
+    {
+        return agent.getName();
     }
 }
 //End of RegisterMsg class

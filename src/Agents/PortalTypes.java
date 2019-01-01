@@ -10,7 +10,7 @@ package Agents;
  *
  * @author T-A-T
  */
-public enum PortalTypes 
+public enum PortalTypes
 {
     BROAD,HUB,ATC,BAG,SEC;
 }
