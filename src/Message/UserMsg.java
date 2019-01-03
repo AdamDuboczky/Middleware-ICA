@@ -32,7 +32,7 @@ public class UserMsg implements Message
      */
     private final String senderPortalType;
     /**
-     * The type of the portal which the reciever is connected to
+     * The type of the portal which the receiver is connected to
      */
     private final String destPortalType;
     /**
@@ -117,7 +117,7 @@ public class UserMsg implements Message
 
     
     /**
-     * Gets the portal type which the agent recieving the message is connected to
+     * Gets the portal type which the agent receiving the message is connected to
      * @return the portal type as a string
      */
     @Override
