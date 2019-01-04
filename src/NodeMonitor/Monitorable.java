@@ -6,7 +6,7 @@
 
 package NodeMonitor;
 
-import Message.Message;
+import Message.SuperMessage;
 
 /**
  *
@@ -39,6 +39,6 @@ public interface Monitorable
      * @return String to be printed to console
      */
     
-    public void updateMonitor(Message message); 
+    public void updateMonitor(SuperMessage message); 
 }
 //End of Monitorable interface

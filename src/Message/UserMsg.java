@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  *
  * @author T-A-T
  */
-public class UserMsg implements Message
+public class UserMsg implements IUserMessage
 {
     /**
      * The message to be sent round the system
@@ -92,16 +92,6 @@ public class UserMsg implements Message
         return this.sender;
     }
     //End of getSender
-    /**
-     * Not implemented in this version
-     * @return 
-     */
-    @Override
-    public SysMsgTypes getSysMessage()
-    {
-        return null;
-    }
-    //End of getSysMessage
     
     
     /**
@@ -126,17 +116,7 @@ public class UserMsg implements Message
         return senderPortalType;
     }
     //End of getPortVisited
-    
-    
-    /**
-     * Not implemented in this version
-     * @return 
-     */
-    @Override
-    public MetaAgent getAgent()
-    {
-        return null;
-    }
+
     /**
      * Not implemented in this version
      * @return 

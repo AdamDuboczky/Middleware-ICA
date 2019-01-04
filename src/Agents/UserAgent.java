@@ -6,8 +6,8 @@
 
 package Agents;
 
-import Message.Message;
 import Message.SysMsgTypes;
+import Message.SuperMessage;
 
 /**
  *
@@ -22,7 +22,7 @@ public class UserAgent extends MetaAgent
     //End of UserAgent default constructor
 
     @Override
-    protected void messageHandler(Message message)
+    protected void messageHandler(SuperMessage message)
     {
         if(message.getSysMessage() == SysMsgTypes.NOTFOUND)
         {

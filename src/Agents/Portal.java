@@ -6,13 +6,13 @@
 
 package Agents;
 
-import Message.Message;
 import Message.SysMsgTypes;
 import Message.SystemMsg;
 import static Simulation.Main.exec;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Message.SuperMessage;
 
 /**
  *
@@ -38,11 +38,11 @@ public class Portal extends MetaAgent
      * @param msg Message to be sent.
      */
     @Override
-    protected void messageHandler(Message msg)
+    protected void messageHandler(SuperMessage msg)
     {   
         if(msg.getDestPortType() == null ? PortalTypes.BROAD.name() == null : msg.getDestPortType().equals(PortalTypes.BROAD.name())) //Check if message = broadcast/null
         {
-            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
+            SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
             
             agentTable.forEach((t, u) ->    //Distribute to all agents, but the sender
             {
@@ -67,7 +67,7 @@ public class Portal extends MetaAgent
         }
         else if (msg.getDestPortType().equals(this.name) && agentTable.containsKey(msg.getDestination())) //Check to see if correct portal & has recipient
         {
-            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
+            SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
                 
             try
             {
@@ -81,7 +81,7 @@ public class Portal extends MetaAgent
         }
         else if(msg.getDestPortType().equals(this.name) && agentTable.containsKey(msg.getSender())) //Check to see if correct portal & has sender
         {
-            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
+            SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
 
             try
             {
@@ -97,7 +97,7 @@ public class Portal extends MetaAgent
         {
             if(agentTable.containsKey(msg.getSender())) //Check for sender in senders port
             {
-                Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
+                SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
 
                 try
                 {
@@ -116,7 +116,7 @@ public class Portal extends MetaAgent
         }
         else if(getSuperAgent() != null) //Check to see if super exists to send message
         {
-            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
+            SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             pushToSuper(message);
         }
         else //Log that message time out, no recipient &/or no sender.

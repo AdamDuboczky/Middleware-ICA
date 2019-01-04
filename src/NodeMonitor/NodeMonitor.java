@@ -6,9 +6,9 @@
 
 package NodeMonitor;
 
-import Message.Message;
 import java.util.ArrayList;
 import java.util.List;
+import Message.SuperMessage;
 
 /**
  *
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class NodeMonitor
 {
-    private volatile List<Message> messageLog;
+    private volatile List<SuperMessage> messageLog;
     
     public NodeMonitor()
     {
@@ -24,7 +24,7 @@ public class NodeMonitor
     }
     //End of NodeMonitor default constructor
     
-    public void updateMonitor(Message message)
+    public void updateMonitor(SuperMessage message)
     {
         if(message != null)
         {
@@ -39,7 +39,7 @@ public class NodeMonitor
     }
     //End of getLogSize
     
-    public Message grabUpdate(int index)
+    public SuperMessage grabUpdate(int index)
     {
         return messageLog.get(index);
     }
