@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
  *
  * @author T-A-T
  */
-public class SystemMsg implements ISystemMessage
+public class SystemMsg implements Message
 {
     /**
      * The user message inside of the system message
      */
-    private final InformationMessage inner;
+    private final Message inner;
     /**
      * The status of the system message
      */
@@ -33,7 +33,7 @@ public class SystemMsg implements ISystemMessage
      */
     private final String msgAgent;
     
-    public SystemMsg(InformationMessage inner, String msgAgent, SysMsgTypes systemMsg)
+    public SystemMsg(Message inner, String msgAgent, SysMsgTypes systemMsg)
     {
         this.inner = inner;
         this.systemMsg = systemMsg;
@@ -101,7 +101,15 @@ public class SystemMsg implements ISystemMessage
         return inner.getSenderPort();
     }
     //End of getPortVisited
-
+    /**
+     * Not implemented in this version
+     * @return 
+     */
+    @Override
+    public MetaAgent getAgent()
+    {
+        return null;
+    }
     /**
      * Gets the amount of hops the message is allowed to have
      * @return the amount of hops the message is allowed as an int

@@ -12,7 +12,7 @@ import Agents.MetaAgent;
  *
  * @author T-A-T
  */
-public class RegisterMsg implements IRegisterMessage
+public class RegisterMsg implements Message
 {
     /**
      * The agent which sent the registration message
@@ -27,6 +27,24 @@ public class RegisterMsg implements IRegisterMessage
         this.agent = agent;
     }
     /**
+     * Not implemented in this version
+     * @return 
+     */    
+    @Override
+    public String getUserMessage()
+    {
+        return null;
+    }
+    /**
+     * Not implemented in this version
+     * @return 
+     */
+    @Override
+    public String getDestination()
+    {
+        return null;
+    }
+    /**
      * Gets the name of the agent which sent the registration message
      * @return the name of the agent which sent the message as a string
      */
@@ -34,6 +52,33 @@ public class RegisterMsg implements IRegisterMessage
     public String getSender()
     {
         return "Agent: " + agent.getName() + " registering with super";
+    }
+    /**
+     * Not implemented in this version
+     * @return 
+     */
+    @Override
+    public String getDestPortType()
+    {
+        return null;
+    }
+    /**
+     * Not implemented in this version
+     * @return 
+     */
+    @Override
+    public SysMsgTypes getSysMessage()
+    {
+        return null;
+    }
+    /**
+     * Not implemented in this version
+     * @return 
+     */
+    @Override
+    public String getSenderPort()
+    {
+        return null;
     }
     /**
      * Gets the agent which sent the registration message

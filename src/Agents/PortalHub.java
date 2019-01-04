@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -6,12 +6,12 @@
 
 package Agents;
 
+import Message.Message;
 import Message.SysMsgTypes;
 import Message.SystemMsg;
 import static Simulation.Main.exec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Message.SuperMessage;
 
 /**
  *
@@ -26,13 +26,13 @@ public class PortalHub extends Portal
     //End of PortalHub default constructor
     
     @Override
-    protected void messageHandler(SuperMessage msg)
+    protected void messageHandler(Message msg)
     {
         if(msg.getDestPortType().equals(msg.getLastAgent())) //Check to see if message has been to destination portal
         {
             if(agentTable.containsKey(msg.getSenderPort())) //Check to see if message sender port exists
             {
-                SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
+                Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
 
                 try
                 {
@@ -51,7 +51,7 @@ public class PortalHub extends Portal
         }
         else if(msg.getDestPortType() == null ? PortalTypes.BROAD.name() == null : msg.getDestPortType().equals(PortalTypes.BROAD.name())) //Check message = broadcast/null
         {
-            SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
             
             agentTable.forEach((t, u) -> //Send to all agents except the sender
             {
@@ -76,7 +76,7 @@ public class PortalHub extends Portal
         }
         else if(agentTable.containsKey(msg.getDestPortType()))
         {
-            SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
             
             try
             {
@@ -90,12 +90,12 @@ public class PortalHub extends Portal
         }
         else if (getSuperAgent() != null)
         {
-            SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             pushToSuper(message);
         }
         else if(agentTable.containsKey(msg.getSenderPort()))
         {
-            SuperMessage message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
+            Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             
             try
             {

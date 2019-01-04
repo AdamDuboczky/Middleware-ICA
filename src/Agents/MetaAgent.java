@@ -6,6 +6,7 @@
 
 package Agents;
 
+import Message.Message;
 import Message.RegisterMsg;
 import Message.UserMsg;
 import NodeMonitor.Monitorable;
@@ -15,13 +16,12 @@ import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Message.SuperMessage;
 
 /**
  *
  * @author T-A-T
  */
-public abstract class MetaAgent extends LinkedBlockingQueue<SuperMessage> implements Runnable, Monitorable
+public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements Runnable, Monitorable
 {
     protected String name;
     protected MetaAgent superAgent;
@@ -123,7 +123,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<SuperMessage> implem
     }
     //End of registerAgent
     
-    public void pushToSuper(SuperMessage message)
+    public void pushToSuper(Message message)
     {
         if(message != null)
         {
@@ -186,7 +186,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<SuperMessage> implem
     //End of hasMonitor
     
     @Override
-    public void updateMonitor(SuperMessage message)
+    public void updateMonitor(Message message)
     {
         if(this.monitor != null)
         {
@@ -195,7 +195,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<SuperMessage> implem
     }
     //End of updateMonitor
     
-    protected void handleMessage(SuperMessage message)
+    protected void handleMessage(Message message)
     {
         if(message != null)
         {
@@ -221,6 +221,6 @@ public abstract class MetaAgent extends LinkedBlockingQueue<SuperMessage> implem
     }
     //End of handleMessage
     
-    protected abstract void messageHandler(SuperMessage message);
+    protected abstract void messageHandler(Message message);
 }
 //End of MetaAgent class
