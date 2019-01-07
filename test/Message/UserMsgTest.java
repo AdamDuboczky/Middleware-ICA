@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Dub_2
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class UserMsgTest
 {

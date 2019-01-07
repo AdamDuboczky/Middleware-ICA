@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author T7056773
  */
 public class NodeMonitorTest {
     

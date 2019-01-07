@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Monitor to be 'attached' to a MetaAgent
- * @author T-A-T
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class NodeMonitor
 {

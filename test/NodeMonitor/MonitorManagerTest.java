@@ -17,7 +17,6 @@ import org.junit.Ignore;
 
 /**
  *
- * @author T7056773
  */
 public class MonitorManagerTest {
 

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author T-A-T
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class UserMsg implements Message
 {

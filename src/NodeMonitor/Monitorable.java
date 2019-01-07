@@ -11,7 +11,7 @@ import Message.Message;
 /**
  * Interface to be implemented by MetaAgents, allowing them to be monitored.
  * Allows for management/testing/debugging of the application.
- * @author T-A-T
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public interface Monitorable 
 { 
