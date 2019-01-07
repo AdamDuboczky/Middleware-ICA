@@ -67,7 +67,7 @@ public class MonitorManagerTest {
     /**
      * Test of run method, of class MonitorManager.
      */
-    @Ignore
+    //@Ignore
     @Test
     public void testRun() {
         System.out.println("Testing getting information for each  monitor...");
@@ -78,13 +78,15 @@ public class MonitorManagerTest {
         instance.addMonitor(monitor1);
         instance.addMonitor(monitor2);
         instance.addMonitor(monitor3);
-        Message message1 = new UserMsg("ATC", "","","","");
-        Message messag2 = new UserMsg();
-        Message messag3 = new UserMsg();
-        Message messag4 = new UserMsg();
+        Message message1 = new UserMsg("ATC", "GRND","Hello from the high ground","Phil",null);
+        Message message2 = new UserMsg("GRND", "ATC","Spillage on the runway","Alex",null);
+        Message message3 = new UserMsg("SEC", "ATC","Please be aware of passenger X","Connor",null);
+        Message message4 = new UserMsg("ATC", "PLANE","You are free to fly.","George",null);
         monitor1.updateMonitor(message1);
-        Thread thread = new Thread();
-        instance.run();
+        monitor1.updateMonitor(message2);
+        monitor1.updateMonitor(message3);
+        monitor1.updateMonitor(message4);        
+        (new Thread(instance)).start();
       
     }
 
