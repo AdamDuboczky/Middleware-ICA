@@ -47,6 +47,11 @@ public class MonitorManager implements Runnable
         }
     }
     
+    public boolean hasMonitor(NodeMonitor monitor)
+    {
+        return monitors.containsKey(monitor);
+    }
+    
     /**
      * When thread is executed inspects each NodeMonitor for information
      */
