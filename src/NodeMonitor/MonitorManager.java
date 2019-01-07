@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * Manages all NodeMonitors in the system, is a thread and therefore implements Runnable
- * @author t7081971
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class MonitorManager implements Runnable
 {
@@ -45,6 +45,11 @@ public class MonitorManager implements Runnable
         {
             monitors.remove(monitor);
         }
+    }
+    
+    public boolean hasMonitor(NodeMonitor monitor)
+    {
+        return monitors.containsKey(monitor);
     }
     
     /**

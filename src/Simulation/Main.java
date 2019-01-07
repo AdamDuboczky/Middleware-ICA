@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author T-A-T
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class Main 
 {
@@ -87,7 +87,7 @@ public class Main
         a1.sendMessage(PortalTypes.BAG, "Airplane" , "OMG!");                               //Wrong: wrong portal and trying to send to itself
         a2.sendMessage(PortalTypes.ATC, "Airplane", "Plane inbound");                       //Correct: Valid portal, valid recipient
         a3.sendMessage(PortalTypes.ATC, "Bob" , "I love you");                              //Wrong: non-existent recipient
-        a2.sendMessage(PortalTypes.BROAD, "All", "The airport id now closing");             //Broadcast: every portal & recipient except sender
+        a2.sendMessage(PortalTypes.BROAD, "All", "The airport is now closing");             //Broadcast: every portal & recipient except sender
         a4.sendMessage(PortalTypes.SEC, "Officer", "STOP RIGHT THERE, CRIMINAL SCUM!!!");   //Correct: same portal, valid recipient
         a4.sendMessage(PortalTypes.SEC, "Lehiven", "*Belch*");                              //Returned: Same portal, non-existent recipient
                                                                                             //

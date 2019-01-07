@@ -2,7 +2,7 @@ package Agents;
 
 /**
  *
- * @author T-A-T
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public enum PortalTypes
 {

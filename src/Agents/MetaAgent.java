@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author T-A-T
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements Runnable, Monitorable
 {
