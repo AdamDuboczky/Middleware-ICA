@@ -7,8 +7,8 @@ package Message;
 
 import Agents.MetaAgent;
 import Agents.UserAgent;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
@@ -24,7 +24,7 @@ public class RegisterMsgTest
     public void testGetAgent()
     {
         System.out.println("Testing the method getAgent");
-        MetaAgent adam = new UserAgent("Adam", null);
+        MetaAgent adam = new UserAgent("Adam", null, null);
         RegisterMsg instance = new RegisterMsg(adam);
         MetaAgent expResult = adam;
         MetaAgent result = instance.getAgent();
@@ -39,7 +39,7 @@ public class RegisterMsgTest
     public void testGetHopCount()
     {
         System.out.println("Testing the method getHopCount");
-        MetaAgent adam = new UserAgent("Adam", null);
+        MetaAgent adam = new UserAgent("Adam", null, null);
         RegisterMsg instance = new RegisterMsg(adam); 
         int expResult = 1;
         int result = instance.getHopCount();
@@ -54,7 +54,7 @@ public class RegisterMsgTest
     public void testGetLastAgent()
     {
         System.out.println("Testing the method getLastAgent");
-        MetaAgent adam = new UserAgent("Adam", null);
+        MetaAgent adam = new UserAgent("Adam", null, null);
         RegisterMsg instance = new RegisterMsg(adam);
         String expResult = "Adam";
         String result = instance.getLastAgent();

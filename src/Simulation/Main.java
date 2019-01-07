@@ -37,45 +37,45 @@ public class Main
         //Creates NodeMonitor and add to portals/agents and MonitorManager
         
         //Creates a hub to which all of the portals are connected.
-        MetaAgent hub = new PortalHub(PortalTypes.HUB, null);
+        MetaAgent hub = new PortalHub(PortalTypes.HUB, null, exec);
         NodeMonitor n1 = new NodeMonitor();
         hub.addMonitor(n1);
         manager.addMonitor(n1);
         exec.execute(hub);
         
         //Creates the portals and creates the links to the hub.
-        MetaAgent p1 = new Portal(PortalTypes.ATC, hub);
+        MetaAgent p1 = new Portal(PortalTypes.ATC, hub, exec);
         NodeMonitor n2 = new NodeMonitor();
         p1.addMonitor(n2);
         manager.addMonitor(n2);
         exec.execute(p1);
-        MetaAgent p2 = new Portal(PortalTypes.BAG, hub);
+        MetaAgent p2 = new Portal(PortalTypes.BAG, hub, exec);
         NodeMonitor n3 = new NodeMonitor();
         p2.addMonitor(n3);
         manager.addMonitor(n3);
         exec.execute(p2);
-        MetaAgent p3 = new Portal(PortalTypes.SEC, hub);
+        MetaAgent p3 = new Portal(PortalTypes.SEC, hub, exec);
         NodeMonitor n4 = new NodeMonitor();
         p3.addMonitor(n4);
         manager.addMonitor(n4);
         exec.execute(p3);
 
         //Creates the agents and links them to the portals
-        MetaAgent a1 = new UserAgent("Airplane", p1);
+        MetaAgent a1 = new UserAgent("Airplane", p1, exec);
         NodeMonitor n5 = new NodeMonitor();
         a1.addMonitor(n5);
         manager.addMonitor(n5);
         exec.execute(a1);
-        MetaAgent a2 = new UserAgent("Ground Staff", p2);
+        MetaAgent a2 = new UserAgent("Ground Staff", p2, exec);
         NodeMonitor n6 = new NodeMonitor();
         a2.addMonitor(n6);
         manager.addMonitor(n6);
         exec.execute(a2);
-        MetaAgent a3 = new UserAgent("Officer", p3);
+        MetaAgent a3 = new UserAgent("Officer", p3, exec);
         NodeMonitor n7 = new NodeMonitor();
         a3.addMonitor(n7);
         manager.addMonitor(n7);
-        MetaAgent a4 = new UserAgent("Securitant", p3);
+        MetaAgent a4 = new UserAgent("Securitant", p3, exec);
         NodeMonitor n8 = new NodeMonitor();
         a4.addMonitor(n8);
         manager.addMonitor(n8);
