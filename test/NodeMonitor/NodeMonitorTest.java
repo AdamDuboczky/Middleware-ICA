@@ -5,7 +5,7 @@
  */
 package NodeMonitor;
 
-import Message.Message;
+import Message.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,12 +33,11 @@ public class NodeMonitorTest {
      */
     @Test
     public void testUpdateMonitor() {
-        System.out.println("updateMonitor");
-        Message message = null;
-        NodeMonitor instance = new NodeMonitor();
-        instance.updateMonitor(message);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Updating monitor with a message");
+        Message message = new UserMsg("ATC", "GRND","Hello from the high ground","Phil",null);
+        NodeMonitor monitor = new NodeMonitor();
+        monitor.updateMonitor(message);
+        assertNotNull(monitor.grabUpdate(0));
     }
 
     /**
@@ -46,13 +45,16 @@ public class NodeMonitorTest {
      */
     @Test
     public void testGetLogSize() {
-        System.out.println("getLogSize");
+        System.out.println("Checking the log size...");
         NodeMonitor instance = new NodeMonitor();
-        int expResult = 0;
+        Message message1 = new UserMsg("ATC", "GRND","Hello","Phil",null);
+        Message message2 = new UserMsg("GRND", "GRND","Bye","Alex",null);
+        instance.updateMonitor(message1);
+        instance.updateMonitor(message2);
+        int expResult = 2;
         int result = instance.getLogSize();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Log size: " + instance.getLogSize());
     }
 
     /**
@@ -60,14 +62,13 @@ public class NodeMonitorTest {
      */
     @Test
     public void testGrabUpdate() {
-        System.out.println("grabUpdate");
-        int index = 0;
+        System.out.println("Getting a message from the monitor...");
         NodeMonitor instance = new NodeMonitor();
-        Message expResult = null;
-        Message result = instance.grabUpdate(index);
+        Message message1 = new UserMsg("PLANE", "SEC","Snake on board.","Connor",null);
+        instance.updateMonitor(message1);
+        Message expResult = message1;
+        Message result = instance.grabUpdate(0);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
