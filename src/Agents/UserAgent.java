@@ -1,23 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Agents;
 
 import Message.Message;
 import Message.SysMsgTypes;
+import java.util.concurrent.ExecutorService;
 
 /**
  *
  * @author T-A-T
  */
 public class UserAgent extends MetaAgent
-{   
-    public UserAgent(String name, MetaAgent superAgent)
+{
+    /**
+     * UserAgent constructor
+     * 
+     * @param name Name of meta agent
+     * @param superAgent Agent in charge of routing to this object.
+     * @param exS
+     */
+    public UserAgent(String name, MetaAgent superAgent, ExecutorService exS)
     {
-        super(name, superAgent);
+        super(name, superAgent, exS);
     }
     //End of UserAgent default constructor
 
