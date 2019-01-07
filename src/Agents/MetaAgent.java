@@ -50,10 +50,22 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     
     private void setName(String name)
     {
-        if(name != null && this.superAgent != null)
+        if(name != null)
         {
-            this.name = this.superAgent.checkValidName(name);
+            if(this.superAgent != null)
+            {
+                this.name = this.superAgent.checkValidName(name);
+            }
+            else
+            {
+                this.name = name;
+            }
         }
+        else
+        {
+            this.name = this.checkValidName(name);
+        }
+        
     }
     //End of setName
     
@@ -130,7 +142,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     
     public void sendMessage(PortalTypes destPType, String dest, String message)
     {
-        pushToSuper(new UserMsg(destPType.name(), dest, message, this.name));
+        pushToSuper(new UserMsg(destPType.name(), dest, message, this.name, this.superAgent.getName()));
         
     }
     //End of sendMessage
@@ -196,9 +208,14 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
             {
                 this.registerAgent(message.getAgent());
             }
+            else if(message.getHopCount() < 15)
+            {
+                System.out.println("???" + message.getHopCount() + " " + message.getLastAgent() + "???"); ///THIS IS FOR TESTING PURPOSESS
+                messageHandler(message);
+            }
             else
             {
-                messageHandler(message);
+                Logger.getLogger(name).log(Level.INFO, "Message from {0} timed out", message.getSender());
             }
         }
     }

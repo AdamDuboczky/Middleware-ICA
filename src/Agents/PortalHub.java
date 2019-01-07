@@ -28,24 +28,48 @@ public class PortalHub extends Portal
     @Override
     protected void messageHandler(Message msg)
     {
-        if(msg.getDestPortType() == null ? PortalTypes.BROAD.name() == null : msg.getDestPortType().equals(PortalTypes.BROAD.name()))
+        if(msg.getDestPortType().equals(msg.getLastAgent())) //Check to see if message has been to destination portal
+        {
+            if(agentTable.containsKey(msg.getSenderPort())) //Check to see if message sender port exists
+            {
+                Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
+
+                try
+                {
+                    agentTable.get(msg.getSenderPort()).put(message);
+                    exec.execute(agentTable.get(msg.getSenderPort()));
+                }
+                catch (InterruptedException ie)
+                {
+                    Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ie);
+                }
+            }
+            else //Log no recipient & no sender portal
+            {
+                Logger.getLogger(name).log(Level.INFO, "Message from {0} couldn't find a recipient, and is itself unavailable", msg.getSender());
+            }
+        }
+        else if(msg.getDestPortType() == null ? PortalTypes.BROAD.name() == null : msg.getDestPortType().equals(PortalTypes.BROAD.name())) //Check message = broadcast/null
         {
             Message message = new SystemMsg(msg, this.name, SysMsgTypes.VALID);
             
-            agentTable.forEach((t, u) ->
+            agentTable.forEach((t, u) -> //Send to all agents except the sender
             {
-                try
+                if(!u.getName().equals(msg.getLastAgent()))
                 {
-                    u.put(message);
-                    exec.execute(u);
-                }
-                catch (InterruptedException ex)
-                {
-                    Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
+                    try
+                    {
+                        u.put(message);
+                        exec.execute(u);
+                    }
+                    catch (InterruptedException ex)
+                    {
+                        Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
             
-            if(getSuperAgent() != null)
+            if(getSuperAgent() != null && !msg.getLastAgent().equals(getSuperAgent().getName())) //Broadcast message to super if it hasn't already
             {
                 pushToSuper(message);
             }
@@ -69,19 +93,23 @@ public class PortalHub extends Portal
             Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             pushToSuper(message);
         }
-        else
+        else if(agentTable.containsKey(msg.getSenderPort()))
         {
             Message message = new SystemMsg(msg, this.name, SysMsgTypes.NOTFOUND);
             
             try
             {
-                agentTable.get(msg.getLastAgent()).put(message);
-                exec.execute(agentTable.get(msg.getLastAgent()));
+                agentTable.get(msg.getSenderPort()).put(message);
+                exec.execute(agentTable.get(msg.getSenderPort()));
             }
             catch (InterruptedException ie)
             {
                 Logger.getLogger(Portal.class.getName()).log(Level.SEVERE, null, ie);
             }
+        }
+        else
+        {
+            Logger.getLogger(name).log(Level.INFO, "Message from {0} timed out or couldn't find a recipient, and is itself unavailable", msg.getSender());
         }
     }
     //End of messageHandler
