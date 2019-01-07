@@ -9,36 +9,34 @@ package NodeMonitor;
 import Message.Message;
 
 /**
- *
+ * Interface to be implemented by MetaAgents, allowing them to be monitored.
+ * Allows for management/testing/debugging of the application.
  * @author T-A-T
  */
 public interface Monitorable 
 { 
     /**
-     * Method to add a monitor to a class
-     */  
-    
+     * Method to add a NodeMonitor to a MetaAgent
+     * @param monitor Monitor to be added to the agent
+     */     
     public void addMonitor(NodeMonitor monitor);
     
     /**
-     * Method to remove a monitor to a class
-     */ 
-    
+     * Method to remove a NodeMonitor from a MetaAgent
+     */    
     public void removeMonitor();
     
     /**
-     * Method to check if class currently has a monitor or not
+     * Method to check if MetaAgent currently has a NodeMonitor or not
      * 
-     * @return Boolean, true if class has monitor, false if not.
-     */
-    
+     * @return boolean true if class has monitor, false if not.
+     */    
     public boolean hasMonitor();
     
     /**
-     * Method to return status
-     * @return String to be printed to console
-     */
-    
+     * Method to provide updates about the MetaAgents message(s)
+     * @param message 
+     */    
     public void updateMonitor(Message message); 
 }
 //End of Monitorable interface
