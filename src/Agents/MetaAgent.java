@@ -124,7 +124,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
      * 
      * @param superAgent
      */
-    private void setSuperAgent(MetaAgent superAgent)
+    public void setSuperAgent(MetaAgent superAgent)
     {
         this.superAgent = superAgent;
         
