@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Adam/Documents/NetBeansProjects/Middleware%20ICA/test/Message/RegisterMsgTest.java</file>
-            <file>file:/C:/Users/Adam/Documents/NetBeansProjects/Middleware%20ICA/src/Simulation/Main.java</file>
-            <file>file:/C:/Users/Adam/Documents/NetBeansProjects/Middleware%20ICA/src/Agents/Portal.java</file>
-            <file>file:/C:/Users/Adam/Documents/NetBeansProjects/Middleware%20ICA/test/Message/SystemMsgTest.java</file>
+            <file>file:/C:/Users/Dub_2/OneDrive/Documents/GitHub/Middleware-ICA/src/Message/Message.java</file>
+            <file>file:/C:/Users/Dub_2/OneDrive/Documents/GitHub/Middleware-ICA/src/Agents/Portal.java</file>
+            <file>file:/C:/Users/Dub_2/OneDrive/Documents/GitHub/Middleware-ICA/src/Message/RegisterMsg.java</file>
         </group>
     </open-files>
 </project-private>
