@@ -17,42 +17,28 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *Simulates two agents sending lots of messages to each other
- * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
+ *Simulates what happens when a user sends/receives a blank message
+ * @author Dub_2
  */
-public class BulkMessage
+public class BlankMessage
 {
     public static ExecutorService exec = new ThreadPoolExecutor(5, 10, 2, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args)
     {
-        //Creates a monitor manager for the node monitors
         MonitorManager manager = new MonitorManager();
         exec.execute(manager);
-        
         //Create a portal for the agents
-        MetaAgent portal = new Portal(PortalTypes.ATC, null, exec);
-        NodeMonitor n1 = new NodeMonitor();
-        portal.addMonitor(n1);
-        manager.addMonitor(n1);
+        MetaAgent portal = new Portal(PortalTypes.ATC, null , exec);
+        NodeMonitor monitor = new NodeMonitor();
+        portal.addMonitor(monitor);
+        manager.addMonitor(monitor);
         exec.execute(portal);
         
-        //Create the agent to send the messages
+        //Add agents
         MetaAgent a1 = new UserAgent("Adam", portal, exec);
         MetaAgent a2 = new UserAgent("Bob", portal, exec);
         
-        //Create a message
-        a1.sendMessage(PortalTypes.ATC, "Bob", "Hey bob, lets count to 100");
-        
-        for(int i = 0; i < 100; i++)
-        {
-            a1.sendMessage(PortalTypes.ATC, "Bob", "Number: " + i);
-            a2.sendMessage(PortalTypes.ATC, "Adam", "Number: " + i);
-        }       
+        a1.sendMessage(PortalTypes.ATC, "Bob", "");
     }
-    //End of main    
 }
-//End of BulkMessage

@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *Simulates messages being sent to another agent on the same portal
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class OnePortalSimulation

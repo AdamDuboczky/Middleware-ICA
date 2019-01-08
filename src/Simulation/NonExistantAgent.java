@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *Simulates what happens when the recipient of a message doesn't exist
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class NonExistantAgent

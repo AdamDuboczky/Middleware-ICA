@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *Simulates an agent registering with the system once the system has been established
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class PostEstablished

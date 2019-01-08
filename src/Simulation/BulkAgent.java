@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *Simulates lots of agents sending messages and broadcasts a message to all the agents
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class BulkAgent
@@ -49,6 +49,8 @@ public class BulkAgent
             MetaAgent user = new UserAgent("Agent " + i, portal, exec);
             user.sendMessage(PortalTypes.ATC, "Bob", "I'm Agent" + i + " and i've registered with the portal");
         }
+        
+        bob.sendMessage(PortalTypes.BROAD, "Agent 100", "Hello");
         
     }
     //End of main   

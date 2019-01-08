@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *Simulates a network sending messages when all the agents have already been established
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class PreEstablished 

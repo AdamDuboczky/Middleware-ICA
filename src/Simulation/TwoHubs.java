@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *Simulates what happens when an agent is trying to send messages to another on a different portal hub
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class TwoHubs

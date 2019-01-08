@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *Simulates a message being sent to an agent on another portal
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class PortalToPortalLink
