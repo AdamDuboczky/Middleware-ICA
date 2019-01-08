@@ -15,36 +15,20 @@ import java.time.LocalDateTime;
  */
 public class UserMsg implements Message
 {
-    /**
-     * The message to be sent round the system
-     */
     private final String message;
-    /**
-     * The destination of the message
-     */
     private final String destination;
-    /**
-     * The name of the sender of the message
-     */
     private final String sender;
-    /**
-     * The type of the portal which the sender is connected to
-     */
     private final String senderPortalType;
-    /**
-     * The type of the portal which the receiver is connected to
-     */
     private final String destPortalType;
-    /**
-     * The date and time the message was created
-     */
     private final LocalDateTime timeStamp;
-        /**
-     * Constructor for user message, used to create the unwrapped message
+    
+   /**
+     * Constructor for user message, used to create the unwrapped message, initialises the date and time the message was created
+     * 
      * @param destPortalType the type of the portal which the message is being sent to
      * @param destination The destination of the message
-     * @param message The contents of the message
-     * @param sender The sender of the message
+     * @param message The message to be sent round the system
+     * @param sender The name of the sender of the message
      * @param senderPort the portal name which the sender is connected to
      */
     public UserMsg(String destPortalType, String destination, String message, String sender, String senderPort)
@@ -61,6 +45,7 @@ public class UserMsg implements Message
     
     /**
      * Gets the contents of the message
+     * 
      * @return the contents of the message as a string
      */
     @Override
@@ -73,6 +58,7 @@ public class UserMsg implements Message
     
     /**
      * Gets the destination of the message
+     * 
      * @return the destination of the message as a string
      */    
     @Override
@@ -84,6 +70,7 @@ public class UserMsg implements Message
     
     /**
      * Gets the name of the agent which sent the message
+     * 
      * @return the name of the agent which sent the message as a string
      */
     @Override
@@ -92,6 +79,7 @@ public class UserMsg implements Message
         return this.sender;
     }
     //End of getSender
+    
     /**
      * Not implemented in this version
      * @return 
@@ -101,11 +89,11 @@ public class UserMsg implements Message
     {
         return null;
     }
-    //End of getSysMessage
-    
+    //End of getSysMessage    
     
     /**
      * Gets the portal type which the agent is connected to
+     * 
      * @return the portal type as a string
      */
     @Override
@@ -114,10 +102,10 @@ public class UserMsg implements Message
         return destPortalType;
     }
     //End of getDestPortType
-
     
     /**
      * Gets the portal type which the agent receiving the message is connected to
+     * 
      * @return the portal type as a string
      */
     @Override
@@ -125,8 +113,7 @@ public class UserMsg implements Message
     {
         return senderPortalType;
     }
-    //End of getPortVisited
-    
+    //End of getSenderPort    
     
     /**
      * Not implemented in this version
@@ -137,6 +124,8 @@ public class UserMsg implements Message
     {
         return null;
     }
+    //End of getAgent
+    
     /**
      * Not implemented in this version
      * @return 
@@ -146,8 +135,11 @@ public class UserMsg implements Message
     {
         return 0;
     }
+    //End of getHopCount
+    
     /**
      * The last agent which the message was sent through
+     * 
      * @return the name of the last agent as a string
      */
     @Override
@@ -155,5 +147,6 @@ public class UserMsg implements Message
     {
         return this.sender;
     }
+    //End of getLastAgent
 }
-//End of User class
+//End of UserMsg class

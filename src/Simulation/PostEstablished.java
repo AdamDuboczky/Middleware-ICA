@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author Adam
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class PostEstablished
 {
@@ -55,8 +55,7 @@ public class PostEstablished
         exec.execute(p2);
         
         //Create agents which link to the portals
-        MetaAgent u1 = new UserAgent("Airplane", p1, exec);
-        
+        MetaAgent u1 = new UserAgent("Airplane", p1, exec);        
         MetaAgent u2 = new UserAgent("Baggage clerk", p2, exec);
         
         //Send messsages through the agents
@@ -71,21 +70,17 @@ public class PostEstablished
         exec.execute(p3);
         
         //Register new agents
-        MetaAgent u3 = new UserAgent("Cargo Plane", p1, exec);
-        
-        MetaAgent u4 = new UserAgent("Baggage Handler", p2, exec);
-        
+        MetaAgent u3 = new UserAgent("Cargo Plane", p1, exec);        
+        MetaAgent u4 = new UserAgent("Baggage Handler", p2, exec);        
         MetaAgent u5 = new UserAgent("Security guard", p3, exec);
         
         //Send messages through new agents
-        u3.sendMessage(PortalTypes.BAG, "Baggage Handler", "WHERE ARE MY BAGS?!?!");
-        
-        u4.sendMessage(PortalTypes.ATC, "Airplane", "Do you know de way?");
-        
+        u3.sendMessage(PortalTypes.BAG, "Baggage Handler", "WHERE ARE MY BAGS?!?!");        
+        u4.sendMessage(PortalTypes.ATC, "Airplane", "Do you know de way?");        
         u5.sendMessage(PortalTypes.ATC, "Airplane", "THERES A TERRORIST");
         
-        ///ISSUE WHEN MONITOR IS ACCESSING INFORMATION AND ANOTHER ONE GETS REGISTERED
-        
+        ///ISSUE WHEN MONITOR IS ACCESSING INFORMATION AND ANOTHER ONE GETS REGISTERED        
     }
-    
+    //End of main    
 }
+//End of PostEstablished

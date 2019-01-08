@@ -227,7 +227,9 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     //End of removeMonitor
 
     /**
-      * Confirms the existence of a referenced NodeMonitor object.  
+      * Confirms the existence of a referenced NodeMonitor object.
+      * 
+      * @return true if monitor exists, false if not.
       */
     @Override
     public boolean hasMonitor()

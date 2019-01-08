@@ -19,7 +19,7 @@ public class NodeMonitor
     private volatile List<Message> messageLog;
     
     /**
-     * Default constructor, initialising an ArrayList which stores a log of the messages
+     * NodeMonitor constructor, initialising an ArrayList which stores a log of the messages
      */
     public NodeMonitor()
     {
@@ -29,6 +29,7 @@ public class NodeMonitor
     
     /**
      * NodeMonitor is given a copy of the Message by the MetaAgent to be stored for monitoring
+     * 
      * @param message Message to be added to log
      */
     public void updateMonitor(Message message)
@@ -41,8 +42,9 @@ public class NodeMonitor
     //End of updateMonitor
     
     /**
-     * Returns the current size of the ArrayList messageLog 
-     * @return int size of the ArrayList
+     * Returns the current size of the ArrayList messageLog
+     * 
+     * @return size of the ArrayList
      */
     public int getLogSize()
     {
@@ -52,8 +54,9 @@ public class NodeMonitor
     
     /**
      * Returns a Message so that this can be inspected
+     * 
      * @param index Specified index for the Message needed from ArrayList
-     * @return Message selected message to be inspected
+     * @return selected message to be inspected
      */
     public Message grabUpdate(int index)
     {

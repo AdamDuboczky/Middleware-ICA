@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author Adam
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class NonExistantAgent
 {
@@ -43,10 +43,9 @@ public class NonExistantAgent
         MetaAgent a = new UserAgent("Airplane", portal, exec);
         
         //Send a message from the agent to a non existant one
-        a.sendMessage(PortalTypes.ATC, "Adam", "Hi");
-        
-        
+        a.sendMessage(PortalTypes.ATC, "Adam", "Hi"); 
         
     }
-    
+    //End of main    
 }
+//End of NonExistantAgent

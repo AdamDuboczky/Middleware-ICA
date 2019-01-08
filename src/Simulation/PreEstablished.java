@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
-public class Main 
+public class PreEstablished 
 {
     public static ExecutorService exec = new ThreadPoolExecutor(5, 10, 2, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
     /**
@@ -95,4 +95,4 @@ public class Main
     }
     //End of main
 }
-//End of Main class
+//End of PreEstablished class

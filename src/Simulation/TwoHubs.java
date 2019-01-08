@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author Adam
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class TwoHubs
 {
@@ -53,5 +53,6 @@ public class TwoHubs
         u2.sendMessage(PortalTypes.ATC, "Airplane", "You've forgotten me!");
         u1.sendMessage(PortalTypes.BAG, "Bag", "Sorry");
     }
-    
+    //End of main    
 }
+//End of TwoHubs class
