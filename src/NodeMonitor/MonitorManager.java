@@ -17,7 +17,7 @@ public class MonitorManager implements Runnable
     private volatile Map<NodeMonitor, Integer> monitors;
 
     /**
-     * Default constructor, initialises HashMap to store NodeMonitors
+     * MonitorManager constructor, initialises HashMap to store NodeMonitors
      */
     public MonitorManager()
     {
@@ -27,6 +27,7 @@ public class MonitorManager implements Runnable
     
     /**
      * Adds NodeMonitor to HashMap
+     * 
      * @param monitor NodeMonitor to be added
      */
     public void addMonitor(NodeMonitor monitor)
@@ -37,7 +38,8 @@ public class MonitorManager implements Runnable
     
     /**
      * Removes specified NodeMonitor from HashMap
-     * @param monitor NodEMonitor to be removed
+     * 
+     * @param monitor NodeMonitor to be removed
      */
     public void removeMonitor(NodeMonitor monitor)
     {
@@ -46,11 +48,19 @@ public class MonitorManager implements Runnable
             monitors.remove(monitor);
         }
     }
+    //End of removeMonitor
     
+    /**
+     * Checks to see if given monitor exists
+     * 
+     * @param monitor NodeMonitor to check for
+     * @return true if monitor exists, false if not.
+     */
     public boolean hasMonitor(NodeMonitor monitor)
     {
         return monitors.containsKey(monitor);
     }
+    //End of hasMonitor
     
     /**
      * When thread is executed inspects each NodeMonitor for information

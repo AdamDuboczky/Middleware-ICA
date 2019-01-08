@@ -14,18 +14,19 @@ import Agents.MetaAgent;
  */
 public class RegisterMsg implements Message
 {
-    /**
-     * The agent which sent the registration message
-     */
     public MetaAgent agent;
+    
     /**
-     * Constructor for RegisterMsg, used to create a register message
+     * RegisterMsg constructor
+     * 
      * @param agent Used to keep track of the agent which sent the message
      */    
     public RegisterMsg(MetaAgent agent)
     {
         this.agent = agent;
     }
+    //End of RegisterMsg default constructor
+    
     /**
      * Not implemented in this version
      * @return 
@@ -35,6 +36,8 @@ public class RegisterMsg implements Message
     {
         return null;
     }
+    //End of getUserMessage
+    
     /**
      * Not implemented in this version
      * @return 
@@ -44,8 +47,11 @@ public class RegisterMsg implements Message
     {
         return null;
     }
+    //End of getDestination
+    
     /**
      * Gets the name of the agent which sent the registration message
+     * 
      * @return the name of the agent which sent the message as a string
      */
     @Override
@@ -53,6 +59,8 @@ public class RegisterMsg implements Message
     {
         return "Agent: " + agent.getName() + " registering with super";
     }
+    //End of getSender
+    
     /**
      * Not implemented in this version
      * @return 
@@ -62,6 +70,8 @@ public class RegisterMsg implements Message
     {
         return null;
     }
+    //End of getDestPortType
+    
     /**
      * Not implemented in this version
      * @return 
@@ -71,6 +81,8 @@ public class RegisterMsg implements Message
     {
         return null;
     }
+    //End of getSysMessage
+    
     /**
      * Not implemented in this version
      * @return 
@@ -80,8 +92,11 @@ public class RegisterMsg implements Message
     {
         return null;
     }
+    //End of getSenderPort
+    
     /**
      * Gets the agent which sent the registration message
+     * 
      * @return the agent which sent the message as type MetaAgent
      */
     @Override
@@ -89,8 +104,11 @@ public class RegisterMsg implements Message
     {
         return agent;
     }
+    //End of getAgent
+    
     /**
      * Gets the hop count for the registration message
+     * 
      * @return the amount of times the message is allowed to hop around the system as an int
      */
     @Override
@@ -98,8 +116,11 @@ public class RegisterMsg implements Message
     {
         return 1;
     }
+    //End of getHopCount
+    
     /**
      * Gets the name of the agent which the message visited last
+     * 
      * @return the name of the agent as a string
      */
     @Override
@@ -107,5 +128,6 @@ public class RegisterMsg implements Message
     {
         return agent.getName();
     }
+    //End of getLastAgent
 }
 //End of RegisterMsg class

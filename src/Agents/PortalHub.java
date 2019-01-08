@@ -14,11 +14,11 @@ import java.util.logging.Logger;
 public class PortalHub extends Portal
 {
     /**
-      * Portal constructor
+      * PortalHub constructor
       * 
       * @param portalType Portals identifier
       * @param superAgent Agent in charge of routing to this object.
-     * @param exS
+      * @param exS
       */
     public PortalHub(PortalTypes portalType, MetaAgent superAgent, ExecutorService exS)
     {
@@ -26,6 +26,11 @@ public class PortalHub extends Portal
     }
     //End of PortalHub default constructor
     
+    /**
+     * Takes message and calls appropriate methods dependant on message state
+     * 
+     * @param msg message to be handled
+     */
     @Override
     protected void messageHandler(Message msg)
     {

@@ -19,11 +19,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author Adam
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class PortalToPortalLink
 {
-
     public static ExecutorService exec = new ThreadPoolExecutor(5, 10, 2, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 
     /**
@@ -37,10 +36,13 @@ public class PortalToPortalLink
         
         //Creates a hub which all the portals are connected to
         MetaAgent hub = new PortalHub(PortalTypes.HUB, null, exec);
+        
         //Create the node monitor
         NodeMonitor n1 = new NodeMonitor();
+        
         //Add the node monitor to the hub
         hub.addMonitor(n1);
+        
         //Add the node monitor to the monitor manager
         manager.addMonitor(n1);
         exec.execute(hub);
@@ -70,5 +72,6 @@ public class PortalToPortalLink
         u2.sendMessage(PortalTypes.ATC, "Airplane", "Customer has just come through, please wait for them");
         u1.sendMessage(PortalTypes.BAG, "Baggage Clerk", "Okay!");
     }
-    
+    //End of main    
 }
+//End of PotralToPortalLink

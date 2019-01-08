@@ -35,7 +35,7 @@ public interface Monitorable
     
     /**
      * Method to provide updates about the MetaAgents message(s)
-     * @param message 
+     * @param message
      */    
     public void updateMonitor(Message message); 
 }

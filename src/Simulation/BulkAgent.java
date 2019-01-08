@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author Adam
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class BulkAgent
 {
@@ -51,6 +51,6 @@ public class BulkAgent
         }
         
     }
-    
-    
+    //End of main   
 }
+//End of BulkAgent

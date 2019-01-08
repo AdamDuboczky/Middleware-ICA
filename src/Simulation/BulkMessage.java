@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author Adam
+ * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
 public class BulkMessage
 {
@@ -51,9 +51,8 @@ public class BulkMessage
         {
             a1.sendMessage(PortalTypes.ATC, "Bob", "Number: " + i);
             a2.sendMessage(PortalTypes.ATC, "Adam", "Number: " + i);
-        }
-        
-        
+        }       
     }
-    
+    //End of main    
 }
+//End of BulkMessage

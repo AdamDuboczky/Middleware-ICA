@@ -19,7 +19,7 @@ public class Portal extends MetaAgent
       * 
       * @param portalType Portals identifier
       * @param superAgent Agent in charge of routing to this object.
-     * @param exS
+      * @param exS
       */
      public Portal(PortalTypes portalType, MetaAgent superAgent, ExecutorService exS)
      {
@@ -28,6 +28,11 @@ public class Portal extends MetaAgent
      }
      //End of Portal default constructor
 
+     /**
+      * Takes message and calls appropriate methods dependant on message state
+      * 
+      * @param msg message to be handled
+      */
     @Override
     protected void messageHandler(Message msg)
     {   
