@@ -286,7 +286,7 @@ public abstract class MetaAgent extends LinkedBlockingQueue<Message> implements 
     //End of handleMessage
     
     /**
-      * Processes the Message object with regards to the type of the meta-agent.
+      * Processes the Message object with regards to the type of the meta-agent and the message state.
       * 
       * @param message
       */

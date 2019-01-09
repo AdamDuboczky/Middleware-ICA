@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  *Simulates what happens when the recipient of a message doesn't exist
  * @author Adam Duboczky, Tom Taylor, Nicol Reid, Connor Hird
  */
-public class NonExistantAgent
+public class NonExistentAgent
 {
     public static ExecutorService exec = new ThreadPoolExecutor(5, 10, 2, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 
@@ -48,4 +48,4 @@ public class NonExistantAgent
     }
     //End of main    
 }
-//End of NonExistantAgent
+//End of NonExistentAgent

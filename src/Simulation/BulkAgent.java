@@ -11,7 +11,6 @@ import Agents.PortalTypes;
 import Agents.UserAgent;
 import NodeMonitor.MonitorManager;
 import NodeMonitor.NodeMonitor;
-import static Simulation.BulkMessage.exec;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

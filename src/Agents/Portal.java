@@ -27,12 +27,7 @@ public class Portal extends MetaAgent
         agentTable = new HashMap<>();
      }
      //End of Portal default constructor
-
-     /**
-      * Takes message and calls appropriate methods dependant on message state
-      * 
-      * @param msg message to be handled
-      */
+     
     @Override
     protected void messageHandler(Message msg)
     {   

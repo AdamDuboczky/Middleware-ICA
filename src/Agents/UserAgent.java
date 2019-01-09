@@ -22,12 +22,7 @@ public class UserAgent extends MetaAgent
         super(name, superAgent, exS);
     }
     //End of UserAgent default constructor
-
-    /**
-     * Takes message and prints appropriate message to console dependant on message state
-     * 
-     * @param message message to be handled
-     */
+    
     @Override
     protected void messageHandler(Message message)
     {

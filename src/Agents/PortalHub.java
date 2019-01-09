@@ -26,11 +26,6 @@ public class PortalHub extends Portal
     }
     //End of PortalHub default constructor
     
-    /**
-     * Takes message and calls appropriate methods dependant on message state
-     * 
-     * @param msg message to be handled
-     */
     @Override
     protected void messageHandler(Message msg)
     {
